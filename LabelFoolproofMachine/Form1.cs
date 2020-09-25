@@ -54,5 +54,10 @@ namespace LabelFoolproofMachine
         {
             settingDlg.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string a = "1";
+        }
     }
 }
