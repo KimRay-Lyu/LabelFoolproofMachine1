@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -48,15 +47,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(558, 582);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(604, 296);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(198, 40);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "保存模板";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -137,7 +127,6 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(851, 586);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
@@ -158,7 +147,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
