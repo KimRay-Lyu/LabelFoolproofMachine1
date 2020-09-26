@@ -20,10 +20,10 @@ namespace LabelFoolproofMachine
         {
             InitializeComponent();
         }
-        public HTuple WindowsHandle = new HTuple();
+        private HTuple WindowsHandle = new HTuple();
         public static HObject Image = new HObject();
         public HObject HRegion = new HObject();
-        private HObject ModelRegion = new HObject();
+       // private HObject ModelRegion = new HObject();
         public static HTuple modelID = new HTuple();
 
 
@@ -31,6 +31,7 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
+            pictureBox1.Focus();
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
@@ -47,37 +48,39 @@ namespace LabelFoolproofMachine
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out ModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Union, out PublicData.createNewChickModel.VisualModelRegion);
                     break;
                 case 1:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out ModelRegion);
-                    HalconCommonFunc.RegionOperatorset(HRegion, ModelRegion, OperatorModel.Difference, out ModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Difference, out PublicData.createNewChickModel.VisualModelRegion);
                     break;
                 case 2:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out ModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Intersection, out PublicData.createNewChickModel.VisualModelRegion);
                     break;
                 default: return;
             }
-
+            HalconCommonFunc.DisplayImage(PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewChickModel.VisualModelRegion, "blue", WindowsHandle, 2);
 
         }
 
         private void OrientationModelDlg_Load(object sender, EventArgs e)
         {
             HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
-            Image.Dispose();
-            HOperatorSet.GenEmptyObj(out Image);
+            //Image.Dispose();
+            //HOperatorSet.GenEmptyObj(out Image);
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Image.Dispose();
+            //Image.Dispose();
             int Res1 = PublicData.hkCameraCltr.DoSoftwareOnce();
-            int Res2 = PublicData.hkCameraCltr.Capture(out Image);
+            PublicData.createNewChickModel.ModelImage.Dispose();
+            int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewChickModel.ModelImage);
             if (Res1 == 0 && Res2 == 0)
             {
 
-                HalconCommonFunc.DisplayImage(Image, WindowsHandle, pictureBox1);
+                HalconCommonFunc.DisplayImage(PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
             }
             else
             {
@@ -87,13 +90,13 @@ namespace LabelFoolproofMachine
 
         private void button2_Click(object sender, EventArgs e)
         {
-            HalconCommonFunc.CreateModel(Image, ModelRegion, WindowsHandle, out modelID);
-
+            HalconCommonFunc.CreateModel(PublicData.createNewChickModel.ModelImage, PublicData.createNewChickModel.VisualModelRegion, WindowsHandle, out PublicData.createNewChickModel.VisualModelID);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            HalconCommonFunc.ReadImage(out Image, WindowsHandle, pictureBox1);
+            PublicData.createNewChickModel.ModelImage.Dispose();
+            HalconCommonFunc.ReadImage(out PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
         }
         /// <summary>
         /// 保存模板

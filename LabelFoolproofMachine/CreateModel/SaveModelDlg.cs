@@ -19,9 +19,9 @@ namespace LabelFoolproofMachine
         {
             InitializeComponent();
         }
-        HTuple ModelID;
-        HObject Image;
-        HObject HRegion;
+        //HTuple ModelID;
+        //HObject Image;
+        //HObject HRegion;
         //OrientationModelDlg OrientationModelDlg;
         //BigLableDlg BigLableDlg = new BigLableDlg();
 
@@ -35,18 +35,19 @@ namespace LabelFoolproofMachine
             {
                 string path = Application.StartupPath + "\\Model\\" + textBox1.Text;
                 if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
-                HOperatorSet.WriteShapeModel(ModelID, path);
-                HOperatorSet.WriteImage(Image, "bmp", 0, path);
-                HOperatorSet.WriteRegion(HRegion, path);
+                PublicData.createNewChickModel.WriteModel(path);
+                //HOperatorSet.WriteShapeModel(ModelID, path);
+                //HOperatorSet.WriteImage(Image, "bmp", 0, path);
+                //HOperatorSet.WriteRegion(HRegion, path);
             }
            
         }
 
         private void SaveModelDlg_Load(object sender, EventArgs e)
         {
-            ModelID = OrientationModelDlg.modelID;
-            Image = OrientationModelDlg.Image;
-            HRegion = BigLableDlg.HRegion;
+            //ModelID = OrientationModelDlg.modelID;
+            //Image = OrientationModelDlg.Image;
+            //HRegion = BigLableDlg.HRegion;
         }
     }
 }
