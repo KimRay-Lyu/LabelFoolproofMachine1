@@ -40,6 +40,7 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ///qqqqq
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
