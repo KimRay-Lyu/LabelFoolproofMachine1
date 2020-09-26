@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -38,7 +37,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -52,15 +50,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(558, 582);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(594, 433);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(198, 40);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "保存模板";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -106,7 +95,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(594, 384);
+            this.button2.Location = new System.Drawing.Point(594, 343);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(198, 40);
             this.button2.TabIndex = 9;
@@ -136,43 +125,31 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(594, 188);
+            this.button6.Location = new System.Drawing.Point(594, 190);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(198, 40);
             this.button6.TabIndex = 18;
             this.button6.Text = "画小标签圆弧";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(594, 237);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(198, 40);
-            this.button7.TabIndex = 19;
-            this.button7.Text = "画小标签翘起";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button1_Click);
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(594, 286);
+            this.button8.Location = new System.Drawing.Point(594, 241);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(198, 40);
             this.button8.TabIndex = 20;
             this.button8.Text = "画小标签宽度1";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button1_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(594, 335);
+            this.button9.Location = new System.Drawing.Point(594, 292);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(198, 40);
             this.button9.TabIndex = 21;
             this.button9.Text = "画小标签宽度2";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button1_Click);
             // 
             // SmallLableDlg
             // 
@@ -182,10 +159,8 @@
             this.ClientSize = new System.Drawing.Size(851, 586);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
@@ -206,7 +181,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -215,7 +189,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
     }

@@ -36,7 +36,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -124,16 +123,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(594, 317);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(198, 40);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "保存模板";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
@@ -163,7 +152,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(851, 586);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -194,7 +182,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
     }

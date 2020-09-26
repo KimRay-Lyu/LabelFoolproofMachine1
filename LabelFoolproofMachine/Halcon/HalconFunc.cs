@@ -521,5 +521,65 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
             HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
         }
+        /// <summary>
+        /// 小标签的有无
+        /// </summary>
+        public static void SmallLableNothing(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple hv_Number, out HObject ho_SelectedRegions)
+        {
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            ho_SelectedRegions.Dispose();
+            HOperatorSet.SetDraw(InWindouHandle, "margin");
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
+            HOperatorSet.ReduceDomain(ImageGray, Rectangle, out HObject ImageReduced);
+            HOperatorSet.Threshold(ImageReduced, out HObject ho_Regions, 0, 67);
+            HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
+            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
+                "and", 0, 402294);
+            HOperatorSet.CountObj(ho_SelectedRegions, out hv_Number);
+            HOperatorSet.SetColor(InWindouHandle, "green");
+            HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
+
+        }
+        /// <summary>
+        /// 小标签圆弧
+        /// </summary>
+        /// <param name="InImage"></param>
+        /// <param name="Rectangle"></param>
+        /// <param name="InWindouHandle"></param>
+        /// <param name="mean"></param>
+        public static void SmallLableCircle(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple mean)
+        {
+            HOperatorSet.GenEmptyObj(out HObject ImageGray);
+            ImageGray.Dispose();
+            HOperatorSet.SetDraw(InWindouHandle, "fill");
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out ImageGray);
+            HOperatorSet.Intensity(Rectangle, InImage, out mean, out HTuple deviation);
+
+
+        }
+        /// <summary>
+        /// 小标签翘起
+        /// </summary>
+        /// <param name="InImage"></param>
+        /// <param name="Rectangle"></param>
+        /// <param name="InWindouHandle"></param>
+        /// <param name="Area"></param>
+        /// <param name="ho_SelectedRegions"></param>
+        public static void SmallLableAngle(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple Area, out HObject ho_SelectedRegions)
+        {
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            ho_SelectedRegions.Dispose();
+            HOperatorSet.SetDraw(InWindouHandle, "margin");
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
+            HOperatorSet.ReduceDomain(ImageGray, Rectangle, out HObject ImageReduced);
+            HOperatorSet.Threshold(ImageReduced, out HObject ho_Regions, 0, 128);
+            HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
+            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
+                "and", 67431.2, 420642);
+            HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
+            HOperatorSet.SetColor(InWindouHandle, "red");
+            HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
+
+        }
     }
 }
