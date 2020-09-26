@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace LabelFoolproofMachine
 {
-    public partial class ChangeModelDlg : Form
+    public partial class ReselectModelDlg : Form
     {
-        public ChangeModelDlg()
+        public ReselectModelDlg()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ///dsadasdsa
         }
     }
 }
