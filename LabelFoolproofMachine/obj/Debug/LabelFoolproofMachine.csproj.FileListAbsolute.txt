@@ -115,3 +115,4 @@ F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug
 F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.csproj.CopyComplete
 F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.exe
 F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.pdb
+C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.ReselectModelDlg.resources

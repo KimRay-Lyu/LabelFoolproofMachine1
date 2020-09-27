@@ -19,22 +19,32 @@ namespace LabelFoolproofMachine
             InitializeComponent();
         }
         private HalconDotNet.HTuple WindowsHandle = new HalconDotNet.HTuple();
-        private HObject Image = new HObject();
         private HObject HRegion = new HObject();
-        private void button4_Click(object sender, EventArgs e)
-        {
-            HalconCommonFunc.ReadImage(out Image, WindowsHandle,pictureBox1);
-        }
 
         private void OtherLocationDlg_Load(object sender, EventArgs e)
         {
             HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
-            Image.Dispose();
-            HOperatorSet.GenEmptyObj(out Image);
+            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DrawRegionCheck();
+            PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
+            HalconCommonFunc.Blob(PublicData.createNewCheckModel.ModelImage,
+                 PublicData.createNewCheckModel.checkOtherModel.OtherRegion, WindowsHandle,
+                out HTuple OtherNumber,
+                out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
+            PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+        public void DrawRegionCheck()
+        {
+            pictureBox1.Focus();
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
@@ -48,10 +58,6 @@ namespace LabelFoolproofMachine
                     break;
                 default: return;
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
 
         }
     }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CloseBtn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.CloseBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,21 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(298, 175);
             this.panel1.TabIndex = 0;
+            // 
+            // CloseBtn
+            // 
+            this.CloseBtn.BackgroundImage = global::LabelFoolproofMachine.Properties.Resources.Close;
+            this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CloseBtn.FlatAppearance.BorderSize = 0;
+            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
+            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
+            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseBtn.Location = new System.Drawing.Point(279, 3);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(16, 16);
+            this.CloseBtn.TabIndex = 6;
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
             // button2
             // 
@@ -78,11 +93,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 21);
+            this.label1.Size = new System.Drawing.Size(74, 21);
             this.label1.TabIndex = 3;
-            this.label1.Text = "选择模板：";
+            this.label1.Text = "选择模板";
             // 
             // comboBox1
             // 
@@ -93,21 +108,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(211, 29);
             this.comboBox1.TabIndex = 2;
-            // 
-            // CloseBtn
-            // 
-            this.CloseBtn.BackgroundImage = global::LabelFoolproofMachine.Properties.Resources.Close;
-            this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.CloseBtn.FlatAppearance.BorderSize = 0;
-            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
-            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
-            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseBtn.Location = new System.Drawing.Point(279, 3);
-            this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.Size = new System.Drawing.Size(16, 16);
-            this.CloseBtn.TabIndex = 6;
-            this.CloseBtn.UseVisualStyleBackColor = true;
-            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
             // ChangeModelDlg
             // 

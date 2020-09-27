@@ -19,11 +19,6 @@ namespace LabelFoolproofMachine
         {
             InitializeComponent();
         }
-        //HTuple ModelID;
-        //HObject Image;
-        //HObject HRegion;
-        //OrientationModelDlg OrientationModelDlg;
-        //BigLableDlg BigLableDlg = new BigLableDlg();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,10 +30,8 @@ namespace LabelFoolproofMachine
             {
                 string path = Application.StartupPath + "\\Model\\" + textBox1.Text;
                 if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
-                PublicData.createNewChickModel.WriteModel(path);
-                //HOperatorSet.WriteShapeModel(ModelID, path);
-                //HOperatorSet.WriteImage(Image, "bmp", 0, path);
-                //HOperatorSet.WriteRegion(HRegion, path);
+                PublicData.createNewCheckModel.WriteModel(path);
+                IniManager.WriteToIni(PublicData.createNewCheckModel, path + "\\SettingMessage.jason");
             }
            
         }
@@ -48,6 +41,11 @@ namespace LabelFoolproofMachine
             //ModelID = OrientationModelDlg.modelID;
             //Image = OrientationModelDlg.Image;
             //HRegion = BigLableDlg.HRegion;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

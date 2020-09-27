@@ -1,0 +1,24 @@
+{
+    "chickMineLableModel": {
+        "SmallLableMean": 220.84300140911225,
+        "LableNothingNumber": {
+            "data": "aFVYaFh9EyIAAAAAAAAAEkhUVVAAAQAAAAEAAAABAAAApw=="
+        }
+    },
+    "checkBigLableModel": {
+        "BigLableAngleNumber1": {
+            "data": "aFVYaFh9EyIAAAAAAAAAEkhUVVAAAQAAAAEAAAABAAAAAQ=="
+        },
+        "BigLableAngleNumber2": {
+            "data": "aFVYaFh9EyIAAAAAAAAAEkhUVVAAAQAAAAEAAAABAAAAAQ=="
+        },
+        "BigLableNumber": {
+            "data": "aFVYaFh9EyIAAAAAAAAAEkhUVVAAAQAAAAEAAAABAAAAAA=="
+        }
+    },
+    "checkOtherModel": {
+        "OtherNumber": {
+            "data": "aFVYaFh9EyIAAAAAAAAAEkhUVVAAAQAAAAEAAAABAAAAAg=="
+        }
+    }
+}

@@ -51,6 +51,7 @@ namespace LabelFoolproofMachine
         {
             //this.DialogResult = DialogResult.Cancel;
             this.Close();
+            
         }
         /// <summary>
         /// 隐藏旧窗口，显示新窗口
@@ -86,6 +87,7 @@ namespace LabelFoolproofMachine
         private void MuBtn04_Click(object sender, EventArgs e)
         {
             DisForm(orientationModelDlg, bigLableDlg, smallLableDlg, otherLocationDlg);
+          
         }
         private void MuBtn_MouseLeave(object sender, EventArgs e)
         {

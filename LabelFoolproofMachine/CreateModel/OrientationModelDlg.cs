@@ -48,18 +48,18 @@ namespace LabelFoolproofMachine
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Union, out PublicData.createNewChickModel.VisualModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewCheckModel.VisualModelRegion, HRegion, OperatorModel.Union, out PublicData.createNewCheckModel.VisualModelRegion);
                     break;
                 case 1:
-                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Difference, out PublicData.createNewChickModel.VisualModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewCheckModel.VisualModelRegion, HRegion, OperatorModel.Difference, out PublicData.createNewCheckModel.VisualModelRegion);
                     break;
                 case 2:
-                    HalconCommonFunc.RegionOperatorset(PublicData.createNewChickModel.VisualModelRegion, HRegion, OperatorModel.Intersection, out PublicData.createNewChickModel.VisualModelRegion);
+                    HalconCommonFunc.RegionOperatorset(PublicData.createNewCheckModel.VisualModelRegion, HRegion, OperatorModel.Intersection, out PublicData.createNewCheckModel.VisualModelRegion);
                     break;
                 default: return;
             }
-            HalconCommonFunc.DisplayImage(PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewChickModel.VisualModelRegion, "blue", WindowsHandle, 2);
+            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.VisualModelRegion, "blue", WindowsHandle, 2);
 
         }
 
@@ -75,12 +75,12 @@ namespace LabelFoolproofMachine
         {
             //Image.Dispose();
             int Res1 = PublicData.hkCameraCltr.DoSoftwareOnce();
-            PublicData.createNewChickModel.ModelImage.Dispose();
-            int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewChickModel.ModelImage);
+            PublicData.createNewCheckModel.ModelImage.Dispose();
+            int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewCheckModel.ModelImage);
             if (Res1 == 0 && Res2 == 0)
             {
 
-                HalconCommonFunc.DisplayImage(PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
+                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
             }
             else
             {
@@ -90,13 +90,15 @@ namespace LabelFoolproofMachine
 
         private void button2_Click(object sender, EventArgs e)
         {
-            HalconCommonFunc.CreateModel(PublicData.createNewChickModel.ModelImage, PublicData.createNewChickModel.VisualModelRegion, WindowsHandle, out PublicData.createNewChickModel.VisualModelID);
+            HalconCommonFunc.CreateModel(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.VisualModelRegion, WindowsHandle, out PublicData.createNewCheckModel.VisualModelID);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            PublicData.createNewChickModel.ModelImage.Dispose();
-            HalconCommonFunc.ReadImage(out PublicData.createNewChickModel.ModelImage, WindowsHandle, pictureBox1);
+            PublicData.createNewCheckModel.ModelImage.Dispose();
+            HalconCommonFunc.ReadImage(out PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+        
+
         }
         /// <summary>
         /// 保存模板

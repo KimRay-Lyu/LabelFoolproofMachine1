@@ -25,8 +25,8 @@ namespace LabelFoolproofMachine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string subPath = Application.StartupPath + "\\Config";
-            PublicData.settingMessage = IniManager.ReadFromIni<SettingMessage>(subPath + "\\SettingMessage.Jason");
+            //string subPath = Application.StartupPath + "\\Config";
+            //PublicData.settingMessage = IniManager.ReadFromIni<SettingMessage>(subPath + "\\SettingMessage.Jason");
             //连接相机
             //HkCameraCltr.EnumDevices();
             //if (0 == PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName))

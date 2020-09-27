@@ -508,17 +508,17 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="InImage"></param>
         /// <param name="Rectangle"></param>
         /// <param name="Area"></param>
-        public static void Blob(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple Area, out HObject ho_SelectedRegions)
+        public static void Blob(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple Number, out HObject ho_SelectedRegions)
         {
             HOperatorSet.SetDraw(InWindouHandle, "fill");
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ho_ImageGray);
             //HOperatorSet.GenRectangle1(out HObject ho_Rectangle, 505.0, 10.0164, 907.0, 328.514);
             HOperatorSet.ReduceDomain(ho_ImageGray, Rectangle, out HObject ho_ImageReduced);
-            HOperatorSet.Threshold(ho_ImageReduced, out HObject ho_Regions, 24, 239);
+            HOperatorSet.Threshold(ho_ImageReduced, out HObject ho_Regions, 11, 213);
             HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
             HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
-                "and", 0, 100000);
-            HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
+                "and", 1256.88, 8614.68);
+            HOperatorSet.CountObj(ho_SelectedRegions, out Number);
             HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
         }
         /// <summary>
@@ -553,8 +553,8 @@ namespace LabelFoolproofMachine.Halcon
             ImageGray.Dispose();
             HOperatorSet.SetDraw(InWindouHandle, "fill");
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out ImageGray);
-            HOperatorSet.Intensity(Rectangle, InImage, out mean, out HTuple deviation);
-
+            HOperatorSet.Intensity(Rectangle, InImage, out  mean, out HTuple deviation);
+            
 
         }
         /// <summary>
@@ -579,6 +579,37 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
             HOperatorSet.SetColor(InWindouHandle, "red");
             HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
+
+        }
+        public static void SmallLabledistance(HObject InImage, HObject Rectangle, out HTuple DistanceMin, out HTuple DistanceMax,out HObject Edges1)
+        {
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
+            //裁剪二值化
+
+            HOperatorSet.ReduceDomain(ImageGray, Rectangle, out HObject ImageReduced);
+            HOperatorSet.Threshold(ImageReduced, out HObject Regions, 59, 158);
+            //提取亚像素边缘
+
+            HOperatorSet.EdgesSubPix(ImageReduced, out  Edges1, "canny", 1, 20, 40);
+            //计算边缘数量
+            HOperatorSet.CountObj(Edges1, out HTuple Number);
+            //排序边缘轮廓
+            HOperatorSet.SortContoursXld(Edges1, out HObject ho_SortedContours, "upper_left",
+                "true", "row");
+            //选择轮廓1，2
+            HOperatorSet.SelectObj(ho_SortedContours, out HObject ho_ObjectSelected2, 1);
+            HOperatorSet.SelectObj(ho_SortedContours, out HObject ho_ObjectSelected3, 2);
+            HTuple RowBegin;
+            //将两个轮廓拟合，得出尺寸
+            HOperatorSet.FitLineContourXld(ho_ObjectSelected2, "tukey", -1, 0, 5, 2, out RowBegin,
+                out HTuple ColBegin, out HTuple RowEnd, out HTuple ColEnd, out HTuple Nr, out HTuple Nc, out HTuple Dist);
+            HOperatorSet.FitLineContourXld(ho_ObjectSelected3, "tukey", -1, 0, 5, 2, out HTuple RowBegin1,
+                out HTuple ColBegin1, out HTuple RowEnd1, out HTuple ColEnd1, out HTuple Nr1, out HTuple Nc1,
+                out HTuple Dist1);
+            //计算最大和最小尺寸
+            HOperatorSet.DistanceSs(RowBegin, ColBegin, RowEnd, ColEnd, RowBegin1,
+                ColBegin1, RowEnd1, ColEnd1, out DistanceMin, out DistanceMax);
+
 
         }
     }
