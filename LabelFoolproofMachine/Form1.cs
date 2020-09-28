@@ -20,7 +20,6 @@ namespace LabelFoolproofMachine
         private CreateModelDlg createModelDlg = new CreateModelDlg();
         private ChangeModelDlg changeModelDlg = new ChangeModelDlg();
         private SettingDlg settingDlg = new SettingDlg();
-        public delegate void ShowModelName(string ModelName);
         HTuple WindowsHandle = new HTuple();
         public Form1()
         {
@@ -29,7 +28,7 @@ namespace LabelFoolproofMachine
         }
         private void Receiver(string ModelName)
         {
-            this.label2.Text = ModelName;
+           
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,9 +52,17 @@ namespace LabelFoolproofMachine
 
         private void 切换模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeModelDlg.SendModelName = this.Receiver;
-            changeModelDlg.ShowDialog();
-
+            //changeModelDlg.SendModelName = this.Receiver;
+            if(changeModelDlg.ShowDialog() == DialogResult.OK)
+            {
+                PublicData.CheckModel = IniManager.ReadFromIni<CheckModel>(changeModelDlg.sChangeModelPath + "\\SettingMessage.jason");
+                if (PublicData.CheckModel == null)
+                {
+                    PublicData.CheckModel = new CheckModel();
+                }
+                PublicData.CheckModel.ReadModel(changeModelDlg.sChangeModelPath);
+                label2.Text = changeModelDlg.ModelName;
+            }        
         }
 
         private void 获取相机图片测试ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,9 +80,6 @@ namespace LabelFoolproofMachine
             HalconCommonFunc.ReadImage(out PublicData.CheckModel.ModelImage, WindowsHandle, pictureBox1);
             HalconCommonFunc.LableCheck(WindowsHandle,out HObject Trancontors);
             HalconCommonFunc.DisplayRegionOrXld(Trancontors, "green", WindowsHandle, 2);
-
-
-
         }
 
 

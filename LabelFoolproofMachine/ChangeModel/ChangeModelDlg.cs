@@ -17,7 +17,6 @@ namespace LabelFoolproofMachine
 
     public partial class ChangeModelDlg : Form
     {
-        public Form1.ShowModelName SendModelName;
         public string sChangeModelPath = "";
         public string ModelName;
         public ChangeModelDlg()
@@ -42,11 +41,7 @@ namespace LabelFoolproofMachine
                 this.DialogResult = DialogResult.OK;
                 sChangeModelPath = Application.StartupPath + "\\Model\\" + comboBox1.SelectedItem.ToString();
                 ModelName = comboBox1.Text;
-                SendModelName?.Invoke(ModelName);
-                string path = Application.StartupPath + "\\Model\\" + comboBox1.Text;
-                if (!Directory.Exists(path)) { MessageBox.Show("模板不存在"); return; }
-                PublicData.CheckModel = IniManager.ReadFromIni<CheckModel>(path + "\\SettingMessage.jason");
-                PublicData.CheckModel.ReadModel(path);
+               
             }
 
 
