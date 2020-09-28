@@ -30,12 +30,10 @@ namespace LabelFoolproofMachine
     {
         public SettingMessage()
         {
-            定位模板保存地址 = "";
             CaremerName = "";
         }
 
         public string CaremerName { get; set; }
-        public string 定位模板保存地址 { get; set; }
     }
 
     public class HalconModel

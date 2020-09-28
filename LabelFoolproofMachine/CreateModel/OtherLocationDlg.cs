@@ -31,10 +31,11 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,WindowsHandle,
+            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
                  PublicData.createNewCheckModel.checkOtherModel.OtherRegion,
                 out HTuple OtherNumber,
                 out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherSelect, "blue", WindowsHandle, 2);
             PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;
         }
 

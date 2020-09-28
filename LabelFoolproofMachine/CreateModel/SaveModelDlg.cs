@@ -31,7 +31,7 @@ namespace LabelFoolproofMachine
                 string path = Application.StartupPath + "\\Model\\" + textBox1.Text;
                 if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
                 PublicData.createNewCheckModel.WriteModel(path);
-                IniManager.WriteToIni(PublicData.createNewCheckModel, path + "\\SettingMessage.jason");
+                IniManager.WriteToIni(PublicData.createNewCheckModel, path + "\\CheckModel.jason");
             }
            
         }

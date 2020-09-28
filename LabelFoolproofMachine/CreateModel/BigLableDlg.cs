@@ -33,12 +33,12 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1 = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,WindowsHandle,
+            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
                 PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1,
                 out HTuple BigLableAngleNumber1, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1);
-
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1, "blue", WindowsHandle, 2);
             PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber1 = BigLableAngleNumber1.D;
-            
+
 
         }
         public void DrawRegionCheck()
@@ -64,9 +64,10 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2 = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,WindowsHandle,
+            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
                 PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2,
-                out HTuple BigLableAngleNumber2,  out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2);
+                out HTuple BigLableAngleNumber2, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2, "blue", WindowsHandle, 2);
             PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber2 = BigLableAngleNumber2.D;
         }
 
@@ -74,10 +75,10 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,WindowsHandle,
+            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
                  PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion,
-                out HTuple BigLableNumber,
-                out PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect);
+                out HTuple BigLableNumber, out PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect, "blue", WindowsHandle, 2);
             PublicData.createNewCheckModel.checkBigLableModel.BigLableNumber = BigLableNumber.D;
         }
     }

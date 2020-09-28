@@ -38,8 +38,9 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion = HRegion;
-            HalconCommonFunc.SmallLableNothing(PublicData.createNewCheckModel.ModelImage,WindowsHandle, PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion,
+            HalconCommonFunc.SmallLableNothing(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion,
                 out HTuple LableNothingNumber, out PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions,"blue",WindowsHandle,2);
             PublicData.createNewCheckModel.chickMineLableModel.LableNothingNumber = LableNothingNumber.D;
         }
 
@@ -78,7 +79,7 @@ namespace LabelFoolproofMachine
             HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1,
                 out HTuple DistanceMin, out Eigs);
             PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
-            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            //HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
             HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
             HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
         }

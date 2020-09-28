@@ -20,7 +20,7 @@ namespace LabelFoolproofMachine
         private CreateModelDlg createModelDlg = new CreateModelDlg();
         private ChangeModelDlg changeModelDlg = new ChangeModelDlg();
         private SettingDlg settingDlg = new SettingDlg();
-        HTuple WindowsHandle = new HTuple();
+        public HTuple WindowsHandle = new HTuple();
 
         private RunThread runthread = new RunThread();
         public Form1()
@@ -28,22 +28,17 @@ namespace LabelFoolproofMachine
             InitializeComponent();
 
         }
-        private void Receiver(string ModelName)
-        {
-           
-        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            //string subPath = Application.StartupPath + "\\Config";
-            //PublicData.settingMessage = IniManager.ReadFromIni<SettingMessage>(subPath + "\\SettingMessage.Jason");
-            //连接相机
+            HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
+            
             //HkCameraCltr.EnumDevices();
             //if (0 == PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName))
             //{
-            //    MessageBox.Show("连接成功");
+            //    MessageBox.Show("相机连接成功");
             //}
-            HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
+
 
         }
 
@@ -55,7 +50,7 @@ namespace LabelFoolproofMachine
         private void 切换模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //changeModelDlg.SendModelName = this.Receiver;
-            if(changeModelDlg.ShowDialog() == DialogResult.OK)
+            if (changeModelDlg.ShowDialog() == DialogResult.OK)
             {
                 PublicData.CheckModel = IniManager.ReadFromIni<CheckModel>(changeModelDlg.sChangeModelPath + "\\SettingMessage.jason");
                 if (PublicData.CheckModel == null)
@@ -64,7 +59,7 @@ namespace LabelFoolproofMachine
                 }
                 PublicData.CheckModel.ReadModel(changeModelDlg.sChangeModelPath);
                 label2.Text = changeModelDlg.ModelName;
-            }        
+            }
         }
 
         private void 获取相机图片测试ToolStripMenuItem_Click(object sender, EventArgs e)

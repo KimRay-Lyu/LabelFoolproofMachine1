@@ -439,7 +439,6 @@ namespace LabelFoolproofMachine.Halcon
                 //HOperatorSet.GenEmptyObj(out hobject);
                 //hobject.Dispose();
                 HOperatorSet.HomMat2dIdentity(out HTuple Mat2DIdentity);
-
                 HOperatorSet.HomMat2dRotate(Mat2DIdentity, Angle[i], 0, 0, out HTuple Mat2DRotate);
                 HOperatorSet.HomMat2dTranslate(Mat2DRotate, Row[i], Col[i], out HTuple Mat2DTranslate);
                 HOperatorSet.AffineTransContourXld(ModelXLD, out hobject, Mat2DTranslate);
@@ -476,6 +475,8 @@ namespace LabelFoolproofMachine.Halcon
         /// </summary>
         public static void CreateModel(HObject InImage, HObject hRegion, out HTuple hv_ModelID, out HObject ho_TransContours)
         {
+            HOperatorSet.GenEmptyObj(out ho_TransContours);
+            ho_TransContours.Dispose();
             try
             {
                 HOperatorSet.ReduceDomain(InImage, hRegion, out HObject ho_TemplateImage);
@@ -504,9 +505,12 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="InImage"></param>
         /// <param name="Rectangle"></param>
         /// <param name="Area"></param>
-        public static void BigLableblob(HObject InImage, HTuple InWindHandle, HObject Rectangle, out HTuple Number, out HObject ho_SelectedRegions)
+        public static void BigLableblob(HObject InImage, HObject Rectangle, out HTuple Number, out HObject ho_SelectedRegions)
         {
-            HOperatorSet.SetDraw(InWindHandle, "fill");
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            ho_SelectedRegions.Dispose();
+
+   
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ho_ImageGray);
             //HOperatorSet.GenRectangle1(out HObject ho_Rectangle, 505.0, 10.0164, 907.0, 328.514);
             HOperatorSet.ReduceDomain(ho_ImageGray, Rectangle, out HObject ho_ImageReduced);
@@ -515,14 +519,16 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
                 "and", 1256.88, 8614.68);
             HOperatorSet.CountObj(ho_SelectedRegions, out Number);
-            HOperatorSet.DispObj(ho_SelectedRegions, InWindHandle);
+ 
         }
         /// <summary>
         /// 小标签的有无
         /// </summary>
-        public static void SmallLableNothing(HObject InImage, HTuple InWindHandle, HObject Rectangle, out HTuple hv_Number, out HObject ho_SelectedRegions)
+        public static void SmallLableNothing(HObject InImage, HObject Rectangle, out HTuple hv_Number, out HObject ho_SelectedRegions)
         {
-            HOperatorSet.SetDraw(InWindHandle, "margin");
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            ho_SelectedRegions.Dispose();
+
             HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
             ho_SelectedRegions.Dispose();
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
@@ -532,7 +538,6 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
                 "and", 0, 402294);
             HOperatorSet.CountObj(ho_SelectedRegions, out hv_Number);
-            HOperatorSet.DispObj(ho_SelectedRegions, InWindHandle);
 
         }
         /// <summary>
@@ -586,6 +591,8 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="Edges1"></param>
         public static void SmallLabledistance(HObject InImage, HObject Rectangle, out HTuple DistanceMin, out HObject Edges1)
         {
+            HOperatorSet.GenEmptyObj(out Edges1);
+            Edges1.Dispose();
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
             //裁剪二值化
 
@@ -622,6 +629,8 @@ namespace LabelFoolproofMachine.Halcon
 
         public static void FindShapedModel(HTuple InWindowHandl, HObject InImage, HTuple ModelID, out HObject TranContours)
         {
+            HOperatorSet.GenEmptyObj(out TranContours);
+            TranContours.Dispose();
             HOperatorSet.GetShapeModelContours(out HObject ho_ModelContours, ModelID, 1);
             HOperatorSet.FindShapeModel(InImage, ModelID, (new HTuple(0)).TupleRad()
           , (new HTuple(360)).TupleRad(), 0.5, 1, 0.5, "least_squares", (new HTuple(7)).TupleConcat(
@@ -654,61 +663,62 @@ namespace LabelFoolproofMachine.Halcon
         }
 
 
-        public static void LableCheck(HTuple Inwindowhand, out HObject TranContours)
-        {
-            HalconCommonFunc.FindShapedModel(Inwindowhand, PublicData.CheckModel.ModelImage, PublicData.CheckModel.VisualModelID,
-                out TranContours);
+        //public static void LableCheck(HTuple Inwindowhand, out HObject TranContours)
+        //{
+        //    HalconCommonFunc.FindShapedModel(Inwindowhand, PublicData.CheckModel.ModelImage, PublicData.CheckModel.VisualModelID,
+        //        out TranContours);
 
-            HalconCommonFunc.CheckBigLable(Inwindowhand);
-            HalconCommonFunc.CheckSmallLable(Inwindowhand);
+        //    HalconCommonFunc.CheckBigLable(Inwindowhand);
+        //    HalconCommonFunc.CheckSmallLable(Inwindowhand);
 
-        }
+        //}
         /// <summary>
         /// 检查大标签
         /// </summary>
         /// <param name="AnglehObject"></param>
         /// <param name="AnglehObject1"></param>
         /// <param name="BigLable"></param>
-        public static void CheckBigLable(HTuple Inwindowhand)
+        public static void CheckBigLable(HObject InImage, out HObject AnglehObject, out HObject AnglehObject1, out HObject IntervalLable,
+           out HTuple AnglehObjectNumber, out HTuple AnglehObjectNumber1, out HTuple IntervalLableNumber)
         {
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion1, out HObject AnglehObject);
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion2, out HObject AnglehObject1);
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableRegion, out HObject BigLable);
-            HalconCommonFunc.BigLableblob(PublicData.CheckModel.ModelImage, Inwindowhand, AnglehObject, out HTuple Number, out HObject Select);
-            HalconCommonFunc.BigLableblob(PublicData.CheckModel.ModelImage, Inwindowhand, AnglehObject1, out HTuple Number1, out HObject Select1);
-            HalconCommonFunc.BigLableblob(PublicData.CheckModel.ModelImage, Inwindowhand, BigLable, out HTuple Number2, out HObject Select2);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion1, out AnglehObject);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion2, out AnglehObject1);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableRegion, out IntervalLable);
+            HalconCommonFunc.BigLableblob(InImage, AnglehObject, out AnglehObjectNumber, out HObject Select);
+            HalconCommonFunc.BigLableblob(InImage, AnglehObject1, out AnglehObjectNumber1, out HObject Select1);
+            HalconCommonFunc.BigLableblob(InImage, IntervalLable, out IntervalLableNumber, out HObject Select2);
 
-            switch (Number.I)
-            {
-                case 0:
-                    HalconCommonFunc.DisplayRegionOrXld(AnglehObject, "red", Inwindowhand, 2);
-                    MessageBox.Show("大标签角折起或丢失");
-                    break;
-                case 1:
-                    HalconCommonFunc.DisplayRegionOrXld(AnglehObject, "green", Inwindowhand, 2);
-                    break;
-            }
-            switch (Number1.I)
-            {
-                case 0:
-                    HalconCommonFunc.DisplayRegionOrXld(AnglehObject1, "red", Inwindowhand, 2);
-                    MessageBox.Show("大标签角折起或丢失");
-                    break;
-                case 1:
-                    HalconCommonFunc.DisplayRegionOrXld(AnglehObject1, "green", Inwindowhand, 2);
-                    break;
-            }
-            switch (Number2.I)
-            {
-                case 0:
-                    HalconCommonFunc.DisplayRegionOrXld(BigLable, "green", Inwindowhand, 2);
+            //switch (Number.I)
+            //{
+            //    case 0:
+            //        HalconCommonFunc.DisplayRegionOrXld(AnglehObject, "red", Inwindowhand, 2);
+            //        MessageBox.Show("大标签角折起或丢失");
+            //        break;
+            //    case 1:
+            //        HalconCommonFunc.DisplayRegionOrXld(AnglehObject, "green", Inwindowhand, 2);
+            //        break;
+            //}
+            //switch (Number1.I)
+            //{
+            //    case 0:
+            //        HalconCommonFunc.DisplayRegionOrXld(AnglehObject1, "red", Inwindowhand, 2);
+            //        MessageBox.Show("大标签角折起或丢失");
+            //        break;
+            //    case 1:
+            //        HalconCommonFunc.DisplayRegionOrXld(AnglehObject1, "green", Inwindowhand, 2);
+            //        break;
+            //}
+            //switch (Number2.I)
+            //{
+            //    case 0:
+            //        HalconCommonFunc.DisplayRegionOrXld(BigLable, "green", Inwindowhand, 2);
 
-                    break;
-                case 1:
-                    HalconCommonFunc.DisplayRegionOrXld(BigLable, "red", Inwindowhand, 2);
-                    MessageBox.Show("大标签之间缝隙有");
-                    break;
-            }
+            //        break;
+            //    case 1:
+            //        HalconCommonFunc.DisplayRegionOrXld(BigLable, "red", Inwindowhand, 2);
+            //        MessageBox.Show("大标签之间缝隙有");
+            //        break;
+            //}
 
 
         }
@@ -719,54 +729,56 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="CircleRegion"></param>
         /// <param name="DistanceRegion1"></param>
         /// <param name="DistanceRegion2"></param>
-        public static void CheckSmallLable(HTuple InWindowHandl/*, PictureBox pictureBox*/)
+        public static void CheckSmallLable(HObject InImage, out HObject NothingRegion, out HObject CircleRegion, out HObject DistanceRegion1, out HObject DistanceRegion2
+            , out HTuple NothingRegionNumber, out HTuple Mean, out HTuple Distance1, out HTuple Distance2, out HObject Edges1, out HObject Edges2)
         {
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableNothingRegion, out HObject NothingRegion);
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableCircleRegion, out HObject CircleRegion);
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion1, out HObject DistanceRegion1);
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion2, out HObject DistanceRegion2);
-
-            HalconCommonFunc.SmallLableNothing(PublicData.CheckModel.ModelImage, InWindowHandl, NothingRegion, out HTuple Number, out HObject Select);
-            HalconCommonFunc.SmallLableCircle(PublicData.CheckModel.ModelImage, CircleRegion, out HTuple Mean);
-            HalconCommonFunc.SmallLabledistance(PublicData.CheckModel.ModelImage, DistanceRegion1, out HTuple Distance1, out HObject Edges1);
-            HalconCommonFunc.SmallLabledistance(PublicData.CheckModel.ModelImage, DistanceRegion2, out HTuple Distance2, out HObject Edges2);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableNothingRegion, out NothingRegion);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableCircleRegion, out CircleRegion);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion1, out DistanceRegion1);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion2, out DistanceRegion2);
+            HalconCommonFunc.SmallLableNothing(InImage, NothingRegion, out NothingRegionNumber, out HObject Select);
+            HalconCommonFunc.SmallLableCircle(InImage, CircleRegion, out Mean);
+            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion1, out Distance1, out Edges1);
+            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion2, out Distance2, out Edges2);
             //HalconCommonFunc.DisplayImage(PublicData.CheckModel.ModelImage, InWindowHandl, pictureBox);
-            if (Number > 0)
-            {
-                HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
+            //if (Number > 0)
+            //{
+            //    HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
 
-            }
-            else
-            {
-                MessageBox.Show("没有小标签");
-            }
-            if (PublicData.CheckModel.chickMineLableModel.SmallLableMean + 50 > Mean.D && Mean.D > PublicData.CheckModel.chickMineLableModel.SmallLableMean - 50)
-            {
-                HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
-            }
-            else
-            {
-                MessageBox.Show("小标签圆弧上有多余的纸");
-            }
-            if (PublicData.CheckModel.chickMineLableModel.DistanceMin+20>Distance1.D&&Distance1.D>PublicData.createNewCheckModel.chickMineLableModel.DistanceMin-20)
-            {
-                HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
-            }
-            else
-            {
-                MessageBox.Show("小标签宽度差距大");
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("没有小标签");
+            //}
+            //if (PublicData.CheckModel.chickMineLableModel.SmallLableMean + 50 > Mean.D && Mean.D > PublicData.CheckModel.chickMineLableModel.SmallLableMean - 50)
+            //{
+            //    HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("小标签圆弧上有多余的纸");
+            //}
+            //if (PublicData.CheckModel.chickMineLableModel.DistanceMin+20>Distance1.D&&Distance1.D>PublicData.createNewCheckModel.chickMineLableModel.DistanceMin-20)
+            //{
+            //    HalconCommonFunc.DisplayRegionOrXld(Select, "green", InWindowHandl, 2);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("小标签宽度差距大");
+            //}
 
 
         }
+
         /// <summary>
         /// 其他标签
         /// </summary>
         /// <param name="AnglehObject"></param>
-        public static void CheckOtherLable(HTuple Inwindowhand, out HObject AnglehObject)
+        public static void CheckOtherLable(HObject InImage, out HObject OtherhObject, out HTuple OtherhNumber)
         {
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion1, out AnglehObject);
-            HalconCommonFunc.BigLableblob(PublicData.CheckModel.ModelImage, Inwindowhand, AnglehObject, out HTuple Number, out HObject Select);
+
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion1, out OtherhObject);
+            HalconCommonFunc.BigLableblob(InImage, OtherhObject, out OtherhNumber, out HObject Select);
 
         }
     }

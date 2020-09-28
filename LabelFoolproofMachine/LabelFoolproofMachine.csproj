@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="切换模板\" />
+    <Folder Include="调试\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Close.png" />

@@ -34,7 +34,9 @@ namespace LabelFoolproofMachine
             textBox1.Text = PublicData.settingMessage.CaremerName.ToString();
         }
 
-       
-       
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
     }
 }
