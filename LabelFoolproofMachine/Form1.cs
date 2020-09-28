@@ -21,6 +21,8 @@ namespace LabelFoolproofMachine
         private ChangeModelDlg changeModelDlg = new ChangeModelDlg();
         private SettingDlg settingDlg = new SettingDlg();
         HTuple WindowsHandle = new HTuple();
+
+        private RunThread runthread = new RunThread();
         public Form1()
         {
             InitializeComponent();
@@ -76,12 +78,17 @@ namespace LabelFoolproofMachine
         }
         private void StartCheckButon_Click(object sender, EventArgs e)
         {
-            PublicData.createNewCheckModel.ModelImage.Dispose();
-            HalconCommonFunc.ReadImage(out PublicData.CheckModel.ModelImage, WindowsHandle, pictureBox1);
-            HalconCommonFunc.LableCheck(WindowsHandle,out HObject Trancontors);
-            HalconCommonFunc.DisplayRegionOrXld(Trancontors, "green", WindowsHandle, 2);
+            //PublicData.createNewCheckModel.ModelImage.Dispose();
+            //HalconCommonFunc.ReadImage(out PublicData.CheckModel.ModelImage, WindowsHandle, pictureBox1);
+            //HalconCommonFunc.LableCheck(WindowsHandle,out HObject Trancontors);
+            //HalconCommonFunc.DisplayRegionOrXld(Trancontors, "green", WindowsHandle, 2);
+
+            runthread.StartWork();
         }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            runthread.StopWork();
+        }
     }
 }
