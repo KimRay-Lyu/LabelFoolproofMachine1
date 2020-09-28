@@ -49,8 +49,8 @@ namespace LabelFoolproofMachine
         /// <param name="e"></param>
         private void button8_Click(object sender, EventArgs e)
         {
-            //this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+            //this.Close();
             
         }
         /// <summary>

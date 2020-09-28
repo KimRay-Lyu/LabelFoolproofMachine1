@@ -55,8 +55,10 @@ namespace LabelFoolproofMachine
             ModelImage = new HObject();
             VisualModelID = new HTuple();
             VisualModelRegion = new HObject();
+            //ModelTransContours = new HObject();
             HOperatorSet.GenEmptyObj(out ModelImage);
             HOperatorSet.GenEmptyObj(out VisualModelRegion);
+            //HOperatorSet.GenEmptyObj(out ModelTransContours);
             chickMineLableModel = new ChickMineLableModel();
             checkBigLableModel = new CheckBigLableModel();
             checkOtherModel = new CheckOtherModel();
@@ -67,6 +69,8 @@ namespace LabelFoolproofMachine
         public HTuple VisualModelID;
         [JsonIgnore]
         public HObject VisualModelRegion;
+        //[JsonIgnore]
+        //public HObject ModelTransContours;//定位出的轮廓
 
         public ChickMineLableModel chickMineLableModel;
         public CheckBigLableModel checkBigLableModel;
@@ -80,7 +84,8 @@ namespace LabelFoolproofMachine
             HOperatorSet.ReadImage(out ModelImage, sPath + "\\ModelImage.bmp");
             VisualModelRegion.Dispose();
             HOperatorSet.ReadRegion(out VisualModelRegion, sPath + "\\VisualModelRegion.hobj");
-            chickMineLableModel.LableNothingRegion.Dispose();
+            //ModelTransContours.Dispose();
+            //HOperatorSet.ReadRegion(out ModelTransContours, sPath + "\\ModelTransContours.hobj");
             chickMineLableModel.ReadModel(sPath);
             checkBigLableModel.ReadModel(sPath);
             checkOtherModel.ReadModel(sPath);
@@ -91,6 +96,7 @@ namespace LabelFoolproofMachine
             HOperatorSet.WriteShapeModel(VisualModelID, sPath + "\\VisualModelID.shm");
             HOperatorSet.WriteImage(ModelImage, "bmp", 0, sPath + "\\ModelImage.bmp");
             HOperatorSet.WriteRegion(VisualModelRegion, sPath + "\\VisualModelRegion.hobj");
+            //HOperatorSet.WriteRegion(ModelTransContours, sPath + "\\ModelTransContours.hobj");
             chickMineLableModel.WriteModel(sPath);
             checkBigLableModel.WriteModel(sPath);
             checkOtherModel.WriteModel(sPath);
@@ -136,6 +142,11 @@ namespace LabelFoolproofMachine
         }
         public void ReadModel(string sPath)
         {
+            LableNothingRegion.Dispose();
+            LableCircleRegion.Dispose();
+            LableDistanceRegion1.Dispose();
+            LableDistanceRegion2.Dispose();
+            SmallSelectedRegions.Dispose();
             HOperatorSet.ReadRegion(out LableNothingRegion, sPath + "\\LableNothingRegion.hobj");
             HOperatorSet.ReadRegion(out LableCircleRegion, sPath + "\\LableCircleRegion.hobj");
             HOperatorSet.ReadRegion(out LableDistanceRegion1, sPath + "\\LableDistanceRegion1.hobj");
@@ -187,6 +198,12 @@ namespace LabelFoolproofMachine
         }
         public void ReadModel(string sPath)
         {
+            BigLableAngleRegion1.Dispose();
+            BigLableAngleRegion2.Dispose();
+            BigLableAngleSelected1.Dispose();
+            BigLableAngleSelected2.Dispose();
+            BigLableRegion.Dispose();
+            BigLableSelect.Dispose();
             HOperatorSet.ReadRegion(out BigLableAngleRegion1, sPath + "\\BigLableAngleRegion1.hobj");
             HOperatorSet.ReadRegion(out BigLableAngleRegion2, sPath + "\\BigLableAngleRegion2.hobj");
             HOperatorSet.ReadRegion(out BigLableAngleSelected1, sPath + "\\BigLableAngleSelected1.hobj");
@@ -219,6 +236,8 @@ namespace LabelFoolproofMachine
         }
         public void ReadModel(string sPath)
         {
+            OtherRegion.Dispose();
+            OtherSelect.Dispose();
             HOperatorSet.ReadRegion(out OtherRegion, sPath + "\\OtherRegion.hobj");
             HOperatorSet.ReadRegion(out OtherSelect, sPath + "\\OtherSelect.hobj");
 

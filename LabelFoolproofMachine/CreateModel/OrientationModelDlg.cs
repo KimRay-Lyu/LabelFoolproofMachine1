@@ -25,7 +25,7 @@ namespace LabelFoolproofMachine
         public HObject HRegion = new HObject();
        // private HObject ModelRegion = new HObject();
         public static HTuple modelID = new HTuple();
-
+        HObject TransContours = new HObject();
 
         //PublicModelParam publicModel = new PublicModelParam();
 
@@ -60,6 +60,7 @@ namespace LabelFoolproofMachine
             }
             HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
             HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.VisualModelRegion, "blue", WindowsHandle, 2);
+            
 
         }
 
@@ -90,7 +91,9 @@ namespace LabelFoolproofMachine
 
         private void button2_Click(object sender, EventArgs e)
         {
-            HalconCommonFunc.CreateModel(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.VisualModelRegion, WindowsHandle, out PublicData.createNewCheckModel.VisualModelID);
+            HalconCommonFunc.CreateModel(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.VisualModelRegion, 
+                out PublicData.createNewCheckModel.VisualModelID,out  TransContours);
+            HalconCommonFunc.DisplayRegionOrXld(TransContours, "blue", WindowsHandle, 2);
         }
 
         private void button4_Click(object sender, EventArgs e)

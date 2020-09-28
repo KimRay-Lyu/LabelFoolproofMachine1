@@ -31,8 +31,8 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
-            HalconCommonFunc.Blob(PublicData.createNewCheckModel.ModelImage,
-                 PublicData.createNewCheckModel.checkOtherModel.OtherRegion, WindowsHandle,
+            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,WindowsHandle,
+                 PublicData.createNewCheckModel.checkOtherModel.OtherRegion,
                 out HTuple OtherNumber,
                 out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
             PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;

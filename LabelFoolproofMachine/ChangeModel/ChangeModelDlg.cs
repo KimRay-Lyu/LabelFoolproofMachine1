@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConfigManager;
+using LabelFoolproofMachine.Halcon;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,11 +11,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace LabelFoolproofMachine
 {
+
     public partial class ChangeModelDlg : Form
     {
-        public string sChangeModelPath="";
+        public Form1.ShowModelName SendModelName;
+        public string sChangeModelPath = "";
+        public string ModelName;
         public ChangeModelDlg()
         {
             InitializeComponent();
@@ -27,8 +33,23 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            sChangeModelPath = Application.StartupPath + "\\Model\\"+comboBox1.SelectedItem.ToString();
+            if (comboBox1.Text == "")
+            {
+                MessageBox.Show("选择不能为空");
+            }
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                sChangeModelPath = Application.StartupPath + "\\Model\\" + comboBox1.SelectedItem.ToString();
+                ModelName = comboBox1.Text;
+                SendModelName?.Invoke(ModelName);
+                string path = Application.StartupPath + "\\Model\\" + comboBox1.Text;
+                if (!Directory.Exists(path)) { MessageBox.Show("模板不存在"); return; }
+                PublicData.CheckModel = IniManager.ReadFromIni<CheckModel>(path + "\\SettingMessage.jason");
+                PublicData.CheckModel.ReadModel(path);
+            }
+
+
         }
 
         private void ChangeModelDlg_Load(object sender, EventArgs e)
