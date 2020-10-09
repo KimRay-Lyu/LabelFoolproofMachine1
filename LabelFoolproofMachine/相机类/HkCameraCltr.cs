@@ -122,7 +122,9 @@ namespace HkCamera
                         return 7;
                     }
                     IsOpen = true;
+                  
                     return 0;
+                   
                 }            
             }
             return -1;
@@ -148,8 +150,8 @@ namespace HkCamera
         public int DoSoftwareOnce()
         {
             int nRet;
-            nRet = m_pMyCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
-            
+            nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerMode", 0);
+
             if (MyCamera.MV_OK != nRet)
             {
                 return 1;

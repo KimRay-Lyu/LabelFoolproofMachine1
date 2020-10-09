@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.新建视觉模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.切换模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +97,7 @@
             this.打开本地图片ToolStripMenuItem.Name = "打开本地图片ToolStripMenuItem";
             this.打开本地图片ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
             this.打开本地图片ToolStripMenuItem.Text = "导入本地图片测试";
+            this.打开本地图片ToolStripMenuItem.Click += new System.EventHandler(this.打开本地图片ToolStripMenuItem_Click);
             // 
             // 获取相机图片测试ToolStripMenuItem
             // 
@@ -120,14 +123,16 @@
             // 启动ToolStripMenuItem
             // 
             this.启动ToolStripMenuItem.Name = "启动ToolStripMenuItem";
-            this.启动ToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
+            this.启动ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.启动ToolStripMenuItem.Text = "启动";
+            this.启动ToolStripMenuItem.Click += new System.EventHandler(this.启动ToolStripMenuItem_Click);
             // 
             // 停止ToolStripMenuItem
             // 
             this.停止ToolStripMenuItem.Name = "停止ToolStripMenuItem";
-            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
+            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.停止ToolStripMenuItem.Text = "停止";
+            this.停止ToolStripMenuItem.Click += new System.EventHandler(this.停止ToolStripMenuItem_Click);
             // 
             // 设置ToolStripMenuItem
             // 
@@ -148,17 +153,19 @@
             // 
             // StartCheckButon
             // 
+            this.StartCheckButon.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.StartCheckButon.Location = new System.Drawing.Point(791, 520);
             this.StartCheckButon.Name = "StartCheckButon";
-            this.StartCheckButon.Size = new System.Drawing.Size(205, 90);
+            this.StartCheckButon.Size = new System.Drawing.Size(205, 64);
             this.StartCheckButon.TabIndex = 2;
-            this.StartCheckButon.Text = "开始检测";
+            this.StartCheckButon.Text = "开 始 检 测";
             this.StartCheckButon.UseVisualStyleBackColor = true;
             this.StartCheckButon.Click += new System.EventHandler(this.StartCheckButon_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(830, 616);
+            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(830, 600);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 52);
             this.button2.TabIndex = 3;
@@ -186,6 +193,10 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "xxxx";
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM10";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -204,6 +215,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "标签纸视觉防呆系统";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -221,7 +233,6 @@
         private System.Windows.Forms.ToolStripMenuItem 调试ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开本地图片ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 获取相机图片测试ToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button StartCheckButon;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
@@ -231,6 +242,8 @@
         private System.Windows.Forms.ToolStripMenuItem 启动ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 停止ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        public System.Windows.Forms.PictureBox pictureBox1;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }
 

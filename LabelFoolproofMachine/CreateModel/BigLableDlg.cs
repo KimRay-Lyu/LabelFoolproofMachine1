@@ -26,7 +26,8 @@ namespace LabelFoolproofMachine
         private void BigLableDlg_Load(object sender, EventArgs e)
         {
             HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
-            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            HalconCommonFunc.SetPart(WindowsHandle, 1920, 1200, pictureBox1.Width, pictureBox1.Height);
+            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -75,11 +76,19 @@ namespace LabelFoolproofMachine
         {
             DrawRegionCheck();
             PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
+            HalconCommonFunc.BigLablIntervalLable(PublicData.createNewCheckModel.ModelImage,
                  PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion,
                 out HTuple BigLableNumber, out PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect);
             HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect, "blue", WindowsHandle, 2);
             PublicData.createNewCheckModel.checkBigLableModel.BigLableNumber = BigLableNumber.D;
+        }
+
+        private void BigLableDlg_VisibleChanged(object sender, EventArgs e)
+        {
+            if(this.Visible == true)
+            {
+                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+            }
         }
     }
 }

@@ -33,8 +33,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 83);
+            this.label1.Location = new System.Drawing.Point(12, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -50,16 +50,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 80);
+            this.textBox1.Location = new System.Drawing.Point(83, 51);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(105, 191);
+            this.button2.Location = new System.Drawing.Point(122, 190);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 45);
+            this.button2.Size = new System.Drawing.Size(114, 33);
             this.button2.TabIndex = 3;
             this.button2.Text = "保存";
             this.button2.UseVisualStyleBackColor = true;
@@ -88,16 +88,6 @@
             this.panel2.Size = new System.Drawing.Size(382, 39);
             this.panel2.TabIndex = 4;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.Location = new System.Drawing.Point(3, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 21);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "参数设置";
-            // 
             // button8
             // 
             this.button8.BackColor = System.Drawing.Color.White;
@@ -115,6 +105,16 @@
             this.button8.Text = "×";
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label2.Location = new System.Drawing.Point(3, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 21);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "参数设置";
             // 
             // SettingDlg
             // 

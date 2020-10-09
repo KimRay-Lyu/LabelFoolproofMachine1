@@ -25,7 +25,8 @@ namespace LabelFoolproofMachine
         private void SmallLableDlg_Load(object sender, EventArgs e)
         {
             HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
-            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            HalconCommonFunc.SetPart(WindowsHandle, 1920, 1200, pictureBox1.Width, pictureBox1.Height);
+            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
         }
 
         //private void button4_Click(object sender, EventArgs e)
@@ -39,9 +40,9 @@ namespace LabelFoolproofMachine
             DrawRegionCheck();
             PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion = HRegion;
             HalconCommonFunc.SmallLableNothing(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion,
-                out HTuple LableNothingNumber, out PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions,"blue",WindowsHandle,2);
-            PublicData.createNewCheckModel.chickMineLableModel.LableNothingNumber = LableNothingNumber.D;
+                out HTuple LableNothingMean /*out PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions*/);
+            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion, "blue",WindowsHandle,2);
+            PublicData.createNewCheckModel.chickMineLableModel.LableNothingMean = LableNothingMean.D;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -78,10 +79,12 @@ namespace LabelFoolproofMachine
             PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1 = HRegion;
             HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1,
                 out HTuple DistanceMin, out Eigs);
-            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
-            //HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
             HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
             HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
+            //HalconCommonFunc.DisplayRegionOrXld(Eigs,"bllue",WindowsHandle,2);
+            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
+            //HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -90,9 +93,18 @@ namespace LabelFoolproofMachine
             PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2 = HRegion;
             HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2,
                 out HTuple DistanceMin1, out Eigs);
-            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin1 = DistanceMin1.D;
             HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
             HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
+            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin1 = DistanceMin1.D;
+            
+        }
+
+        private void SmallLableDlg_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+            }
         }
     }
 }

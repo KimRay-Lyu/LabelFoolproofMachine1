@@ -139,6 +139,7 @@
             this.Name = "SmallLableDlg";
             this.Text = "SmallLableDlg";
             this.Load += new System.EventHandler(this.SmallLableDlg_Load);
+            this.VisibleChanged += new System.EventHandler(this.SmallLableDlg_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

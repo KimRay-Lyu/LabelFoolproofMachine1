@@ -127,6 +127,7 @@
             this.Name = "BigLableDlg";
             this.Text = "BigLable";
             this.Load += new System.EventHandler(this.BigLableDlg_Load);
+            this.VisibleChanged += new System.EventHandler(this.BigLableDlg_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

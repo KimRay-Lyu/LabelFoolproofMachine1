@@ -103,6 +103,7 @@
             this.Name = "OtherLocationDlg";
             this.Text = "OtherLocationDlg";
             this.Load += new System.EventHandler(this.OtherLocationDlg_Load);
+            this.VisibleChanged += new System.EventHandler(this.OtherLocationDlg_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

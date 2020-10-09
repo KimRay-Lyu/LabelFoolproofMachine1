@@ -24,7 +24,8 @@ namespace LabelFoolproofMachine
         private void OtherLocationDlg_Load(object sender, EventArgs e)
         {
             HOperatorSet.OpenWindow(0, 0, pictureBox1.Width, pictureBox1.Height, pictureBox1.Handle, "visible", "", out WindowsHandle);
-            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
+            HalconCommonFunc.SetPart(WindowsHandle, 1920, 1200, pictureBox1.Width, pictureBox1.Height);
+            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,6 +61,14 @@ namespace LabelFoolproofMachine
                 default: return;
             }
 
+        }
+
+        private void OtherLocationDlg_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+            }
         }
     }
 }

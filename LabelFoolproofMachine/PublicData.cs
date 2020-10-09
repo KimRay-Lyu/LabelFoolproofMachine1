@@ -24,6 +24,8 @@ namespace LabelFoolproofMachine
 
         public static CheckModel CheckModel = new CheckModel();
         public static CheckModel createNewCheckModel = new CheckModel();//Jason文件读取写入
+
+        public static HTuple WindowsHandle = new HTuple();
     }
 
     public class SettingMessage
@@ -111,9 +113,10 @@ namespace LabelFoolproofMachine
             LableCircleRegion = new HObject();
             LableDistanceRegion1 = new HObject();
             LableDistanceRegion2 = new HObject();
-            SmallSelectedRegions = new HObject();
+            //SmallSelectedRegions = new HObject();
             SmallLableMean = 0.0f;
-            LableNothingNumber = 0.0f;
+            LableNothingMean = 0.0f;
+
         }
         public double DistanceMin;
         public double DistanceMin1;
@@ -125,10 +128,10 @@ namespace LabelFoolproofMachine
         public HObject LableDistanceRegion1;
         [JsonIgnore]
         public HObject LableDistanceRegion2;
-        [JsonIgnore]
-        public HObject SmallSelectedRegions;
+        //[JsonIgnore]
+        //public HObject SmallSelectedRegions;
         public double SmallLableMean;//平均灰度
-        public double LableNothingNumber;//标签有无数量
+        public double LableNothingMean;//标签有无数量
 
         public void WriteModel(string sPath)
         {
@@ -136,7 +139,7 @@ namespace LabelFoolproofMachine
             HOperatorSet.WriteRegion(LableCircleRegion, sPath + "\\LableCircleRegion.hobj");
             HOperatorSet.WriteRegion(LableDistanceRegion1, sPath + "\\LableDistanceRegion1.hobj");
             HOperatorSet.WriteRegion(LableDistanceRegion2, sPath + "\\LableDistanceRegion2.hobj");
-            HOperatorSet.WriteRegion(SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
+            //HOperatorSet.WriteRegion(SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
         }
         public void ReadModel(string sPath)
         {
@@ -144,12 +147,12 @@ namespace LabelFoolproofMachine
             LableCircleRegion.Dispose();
             LableDistanceRegion1.Dispose();
             LableDistanceRegion2.Dispose();
-            SmallSelectedRegions.Dispose();
+            //SmallSelectedRegions.Dispose();
             HOperatorSet.ReadRegion(out LableNothingRegion, sPath + "\\LableNothingRegion.hobj");
             HOperatorSet.ReadRegion(out LableCircleRegion, sPath + "\\LableCircleRegion.hobj");
             HOperatorSet.ReadRegion(out LableDistanceRegion1, sPath + "\\LableDistanceRegion1.hobj");
             HOperatorSet.ReadRegion(out LableDistanceRegion2, sPath + "\\LableDistanceRegion2.hobj");
-            HOperatorSet.ReadRegion(out SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
+           // HOperatorSet.ReadRegion(out SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
 
         }
 
