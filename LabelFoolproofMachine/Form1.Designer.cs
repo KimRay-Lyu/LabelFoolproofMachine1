@@ -40,12 +40,12 @@
             this.启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.停止ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.StartCheckButon = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -89,8 +89,9 @@
             this.传送带控制ToolStripMenuItem});
             this.调试ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.调试ToolStripMenuItem.Name = "调试ToolStripMenuItem";
-            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
-            this.调试ToolStripMenuItem.Text = "调试(D)";
+            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.调试ToolStripMenuItem.Text = "调试";
+            this.调试ToolStripMenuItem.Click += new System.EventHandler(this.调试ToolStripMenuItem_Click);
             // 
             // 打开本地图片ToolStripMenuItem
             // 
@@ -142,35 +143,30 @@
             this.设置ToolStripMenuItem.Text = "设置";
             this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(777, 652);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // StartCheckButon
             // 
+            this.StartCheckButon.BackColor = System.Drawing.Color.Gainsboro;
+            this.StartCheckButon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StartCheckButon.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.StartCheckButon.Location = new System.Drawing.Point(791, 520);
+            this.StartCheckButon.Location = new System.Drawing.Point(791, 533);
             this.StartCheckButon.Name = "StartCheckButon";
-            this.StartCheckButon.Size = new System.Drawing.Size(205, 64);
+            this.StartCheckButon.Size = new System.Drawing.Size(207, 52);
             this.StartCheckButon.TabIndex = 2;
             this.StartCheckButon.Text = "开 始 检 测";
-            this.StartCheckButon.UseVisualStyleBackColor = true;
+            this.StartCheckButon.UseVisualStyleBackColor = false;
             this.StartCheckButon.Click += new System.EventHandler(this.StartCheckButon_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(830, 600);
+            this.button2.Location = new System.Drawing.Point(830, 607);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 52);
+            this.button2.Size = new System.Drawing.Size(136, 42);
             this.button2.TabIndex = 3;
             this.button2.Text = "停止检测";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
@@ -196,6 +192,15 @@
             // serialPort1
             // 
             this.serialPort1.PortName = "COM10";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 35);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(777, 661);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 

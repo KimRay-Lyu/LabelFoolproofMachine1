@@ -3,16 +3,7 @@ using HalconDotNet;
 using HkCamera;
 using LabelFoolproofMachine.Halcon;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using HalconDotNet;
 
 namespace LabelFoolproofMachine
 {
@@ -24,19 +15,23 @@ namespace LabelFoolproofMachine
         //public HTuple WindowsHandle;
 
         private RunThread runthread = new RunThread();
+        
         public Form1()
         {
             InitializeComponent();
             runthread.TheadWorkResultEvent += Runthread_TheadWorkResultEvent1;
-            serialPort1.Open();
+            //serialPort1.Open();
         }
 
 
         private void Runthread_TheadWorkResultEvent1(object sender, RunThread.TheadWorkResultEventArgs e)
         {
-            byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
-            serialPort1.Write(buffer, 0, 3);
-            HOperatorSet.WriteImage(runthread.CameraImage, "bmp", 0, Application.StartupPath + "\\ErrorImage\\" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm"));
+            if (serialPort1.IsOpen)
+            {
+                byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
+                serialPort1.Write(buffer, 0, 3);
+            }
+            HOperatorSet.WriteImage(PublicData.CheckModel.ModelImage, "bmp", 0, Application.StartupPath + "\\ErrorImage\\" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm"));
             MessageBox.Show(e.sResult);
         }
 
@@ -48,7 +43,8 @@ namespace LabelFoolproofMachine
             HalconCommonFunc.SetPart(PublicData.WindowsHandle, 1920, 1200, pictureBox1.Width, pictureBox1.Height);
             PublicData.settingMessage = IniManager.ReadFromIni<SettingMessage>(Application.StartupPath + "\\Config" + "\\SettingMessage.Jason");
             HkCameraCltr.EnumDevices();
-            if (0 == PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName))
+           PublicData.OpenCrame = PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName);
+            if (0 == PublicData.OpenCrame)
             {
                 MessageBox.Show("相机连接成功");
             }
@@ -63,7 +59,7 @@ namespace LabelFoolproofMachine
         private void 新建视觉模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateModelDlg createModelDlg = new CreateModelDlg();
-            PublicData.createNewCheckModel = new CheckModel(); 
+            PublicData.createNewCheckModel = new CheckModel();
             createModelDlg.ShowDialog();
             createModelDlg.Dispose();
         }
@@ -85,7 +81,36 @@ namespace LabelFoolproofMachine
 
         private void 获取相机图片测试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (label2.Text == "xxxx")
+            {
+                MessageBox.Show("未选择模板");
+                return;
+            }
+            if (StartCheckButon.Text != "开 始 检 测")
+            {
+                MessageBox.Show("当前检测未停止");
+                return;
+            }
+            if (PublicData.OpenCrame != 0)
+            {
+                MessageBox.Show("相机未开启");
 
+            }
+            else
+            {
+                PublicData.CheckModel.ModelImage.Dispose();
+                int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.CheckModel.ModelImage);
+                if (Res2 == 0)
+                {
+                    HalconCommonFunc.DisplayImage(PublicData.CheckModel.ModelImage, PublicData.WindowsHandle);
+                    PublicData.调试模式 = 2;//获取相机单次检测
+                    runthread.StartWork();
+                }
+                else
+                {
+                    MessageBox.Show("相机图像获取失败");
+                }
+            }
         }
 
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,12 +122,22 @@ namespace LabelFoolproofMachine
             if (label2.Text == "xxxx")
             {
                 MessageBox.Show("未选择模板");
-
+                return;
+            }
+            if (serialPort1.IsOpen==false)
+            {
+                MessageBox.Show("串口未开启，重启软件重试");
+                return;
+            }
+            if (PublicData.OpenCrame !=0)
+            {
+                MessageBox.Show("相机未开启");
             }
             else
             {
                 if (StartCheckButon.Text == "开 始 检 测")
                 {
+                    PublicData.调试模式 = 0;
                     runthread.StartWork();
                     StartCheckButon.Text = "检测中";
                     StartCheckButon.Enabled = false;
@@ -130,29 +165,90 @@ namespace LabelFoolproofMachine
 
         private void 启动ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] buffer = new byte[3] { 0x8f, 0x00, 0x7f };
-            serialPort1.Write(buffer, 0, 3);
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    byte[] buffer = new byte[3] { 0x8f, 0x00, 0x7f };
+                    serialPort1.Write(buffer, 0, 3);
+                }
+                else
+                {
+                    MessageBox.Show("串口未连接");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void 停止ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
-            serialPort1.Write(buffer, 0, 3);
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
+                    serialPort1.Write(buffer, 0, 3);
+                }
+                else
+                {
+                    MessageBox.Show("串口未连接");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void 打开本地图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PublicData.createNewCheckModel.ModelImage.Dispose();
-            int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewCheckModel.ModelImage);
-            if (Res2 == 0)
+            if (label2.Text == "xxxx")
             {
+                MessageBox.Show("未选择模板");
+                return;
+            }
+            if (StartCheckButon.Text != "开 始 检 测")
+            {
+                MessageBox.Show("当前检测未停止");
+                return;
+            }
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;//该值确定是否可以选择多个文件
+            dialog.Title = "请选择文件夹";
+            dialog.Filter = "图片文件(*.jpg,*.gif,*.bmp)|*.jpg;*.gif;*.bmp";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                for (int i = 0; i < dialog.FileNames.Length; i++)
+                {
+                    string file = dialog.FileNames[i];
+                    PublicData.CheckModel.ModelImage.Dispose();
+                    HOperatorSet.ReadImage(out PublicData.CheckModel.ModelImage, file);
+                    HalconCommonFunc.DisplayImage(PublicData.CheckModel.ModelImage, PublicData.WindowsHandle);
+                }
 
-                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, PublicData.WindowsHandle);
+
+                PublicData.调试模式 = 1;//1是本地单次检测
+                runthread.StartWork();
             }
-            else
-            {
-                MessageBox.Show("相机图像获取失败");
-            }
+
+
+
+
+
+        }
+
+        private void 调试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -38,12 +38,12 @@ namespace LabelFoolproofMachine
 
         private void SaveModelDlg_Load(object sender, EventArgs e)
         {
-            //ModelID = OrientationModelDlg.modelID;
-            //Image = OrientationModelDlg.Image;
-            //HRegion = BigLableDlg.HRegion;
+         
         }
 
-        private void button8_Click(object sender, EventArgs e)
+     
+
+        private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }

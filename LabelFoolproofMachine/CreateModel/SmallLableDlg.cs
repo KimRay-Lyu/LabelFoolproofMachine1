@@ -37,66 +37,83 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion = HRegion;
-            HalconCommonFunc.SmallLableNothing(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion,
-                out HTuple LableNothingMean /*out PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions*/);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion, "blue",WindowsHandle,2);
-            PublicData.createNewCheckModel.chickMineLableModel.LableNothingMean = LableNothingMean.D;
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion = HRegion;
+                HalconCommonFunc.SmallLableNothing(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion,
+                    out HTuple LableNothingMean /*out PublicData.createNewCheckModel.chickMineLableModel.SmallSelectedRegions*/);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.chickMineLableModel.LableNothingRegion, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.chickMineLableModel.LableNothingMean = LableNothingMean.D;
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion = HRegion;
-            HalconCommonFunc.SmallLableCircle(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion,
-                out HTuple SmallLableMean);
-            PublicData.createNewCheckModel.chickMineLableModel.SmallLableMean = SmallLableMean.D;
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion = HRegion;
+                HalconCommonFunc.SmallLableCircle(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion,
+                    out HTuple SmallLableMean);
+                PublicData.createNewCheckModel.chickMineLableModel.SmallLableMean = SmallLableMean.D;
+            }
+
 
         }
-        public void DrawRegionCheck()
+        public int DrawRegionCheck()
         {
+
             pictureBox1.Focus();
-            switch (comboBox1.SelectedIndex)
+            if (PublicData.GetImage == false)
             {
-                case 0:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
-                    break;
-                case 1:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
-                    break;
-                case 2:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
-                    break;
-                default: return;
+                MessageBox.Show("未获取到图片");
+                return 0;
+            }
+            else
+            {
+
+
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
+                        break;
+                    case 1:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
+                        break;
+                    case 2:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
+                        break;
+
+                }
+                return 1;
             }
 
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1 = HRegion;
-            HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1,
-                out HTuple DistanceMin, out Eigs);
-            HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
-            HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
-            //HalconCommonFunc.DisplayRegionOrXld(Eigs,"bllue",WindowsHandle,2);
-            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
-            //HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle, pictureBox1);
-            
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1 = HRegion;
+                HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion1,
+                    out HTuple DistanceMin, out Eigs);
+                HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
+                HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2 = HRegion;
-            HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2,
-                out HTuple DistanceMin1, out Eigs);
-            HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
-            HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
-            PublicData.createNewCheckModel.chickMineLableModel.DistanceMin1 = DistanceMin1.D;
-            
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2 = HRegion;
+                HalconCommonFunc.SmallLabledistance(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableDistanceRegion2,
+                    out HTuple DistanceMin1, out Eigs);
+                HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
+                HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.chickMineLableModel.DistanceMin1 = DistanceMin1.D;
+            }
         }
 
         private void SmallLableDlg_VisibleChanged(object sender, EventArgs e)

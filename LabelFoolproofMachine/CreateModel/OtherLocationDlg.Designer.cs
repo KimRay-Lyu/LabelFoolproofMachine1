@@ -70,12 +70,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(674, 83);
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(673, 97);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 40);
             this.button1.TabIndex = 10;
             this.button1.Text = "画框";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1

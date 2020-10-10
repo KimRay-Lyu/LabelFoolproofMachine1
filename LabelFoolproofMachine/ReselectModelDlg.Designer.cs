@@ -104,7 +104,7 @@
             // 
             // CloseBtn
             // 
-            this.CloseBtn.BackgroundImage = global::LabelFoolproofMachine.Properties.Resources.Close;
+         
             this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CloseBtn.FlatAppearance.BorderSize = 0;
             this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));

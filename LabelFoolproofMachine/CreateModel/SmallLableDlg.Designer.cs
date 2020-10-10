@@ -73,12 +73,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(675, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 40);
             this.button1.TabIndex = 10;
             this.button1.Text = "画小标签有无";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -93,32 +95,38 @@
             // 
             // button6
             // 
+            this.button6.BackColor = System.Drawing.Color.Gainsboro;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Location = new System.Drawing.Point(675, 136);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(152, 40);
             this.button6.TabIndex = 18;
             this.button6.Text = "画小标签圆弧";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button8
             // 
+            this.button8.BackColor = System.Drawing.Color.Gainsboro;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Location = new System.Drawing.Point(675, 187);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(152, 40);
             this.button8.TabIndex = 20;
             this.button8.Text = "画小标签宽度1";
-            this.button8.UseVisualStyleBackColor = true;
+            this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
+            this.button9.BackColor = System.Drawing.Color.Gainsboro;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Location = new System.Drawing.Point(675, 238);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(152, 40);
             this.button9.TabIndex = 21;
             this.button9.Text = "画小标签宽度2";
-            this.button9.UseVisualStyleBackColor = true;
+            this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // SmallLableDlg

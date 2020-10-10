@@ -32,60 +32,79 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1 = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
-                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1,
-                out HTuple BigLableAngleNumber1, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1, "blue", WindowsHandle, 2);
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber1 = BigLableAngleNumber1.D;
 
-
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1 = HRegion;
+                HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
+                    PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion1,
+                    out HTuple BigLableAngleNumber1, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected1, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber1 = BigLableAngleNumber1.D;
+            }
         }
-        public void DrawRegionCheck()
+        public int DrawRegionCheck()
         {
             pictureBox1.Focus();
-            switch (comboBox1.SelectedIndex)
+            if (PublicData.GetImage == false)
             {
-                case 0:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
-                    break;
-                case 1:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
-                    break;
-                case 2:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
-                    break;
-                default: return;
+                MessageBox.Show("未获取到图片");
+                return 0;
             }
+            else
+            {
 
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
+                        break;
+                    case 1:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
+                        break;
+                    case 2:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
+                        break;
+
+                }
+                return 1;
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2 = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
-                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2,
-                out HTuple BigLableAngleNumber2, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2, "blue", WindowsHandle, 2);
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber2 = BigLableAngleNumber2.D;
+
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2 = HRegion;
+                HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
+                    PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleRegion2,
+                    out HTuple BigLableAngleNumber2, out PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleSelected2, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableAngleNumber2 = BigLableAngleNumber2.D;
+            } 
+           
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion = HRegion;
-            HalconCommonFunc.BigLablIntervalLable(PublicData.createNewCheckModel.ModelImage,
-                 PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion,
-                out HTuple BigLableNumber, out PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect, "blue", WindowsHandle, 2);
-            PublicData.createNewCheckModel.checkBigLableModel.BigLableNumber = BigLableNumber.D;
+
+            if (DrawRegionCheck() == 1)
+            {
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion = HRegion;
+                HalconCommonFunc.BigLablIntervalLable(PublicData.createNewCheckModel.ModelImage,
+                     PublicData.createNewCheckModel.checkBigLableModel.BigLableRegion,
+                    out HTuple BigLableNumber, out PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkBigLableModel.BigLableSelect, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.checkBigLableModel.BigLableNumber = BigLableNumber.D;
+            }
+            
+           
         }
 
         private void BigLableDlg_VisibleChanged(object sender, EventArgs e)
         {
-            if(this.Visible == true)
+            if (this.Visible == true)
             {
                 HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
             }

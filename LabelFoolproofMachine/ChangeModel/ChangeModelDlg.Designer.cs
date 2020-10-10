@@ -60,7 +60,7 @@
             this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
             this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseBtn.Location = new System.Drawing.Point(279, 3);
+            this.CloseBtn.Location = new System.Drawing.Point(280, 2);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(16, 16);
             this.CloseBtn.TabIndex = 6;
@@ -69,24 +69,28 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(170, 120);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 33);
             this.button2.TabIndex = 5;
             this.button2.Text = "退出";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(46, 120);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 33);
             this.button1.TabIndex = 4;
             this.button1.Text = "确认";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -101,6 +105,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(46, 53);
@@ -108,6 +113,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(211, 29);
             this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // ChangeModelDlg
             // 

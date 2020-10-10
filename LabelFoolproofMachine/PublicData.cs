@@ -26,6 +26,9 @@ namespace LabelFoolproofMachine
         public static CheckModel createNewCheckModel = new CheckModel();//Jason文件读取写入
 
         public static HTuple WindowsHandle = new HTuple();
+        public static bool GetImage;
+        public static int 调试模式;
+        public static int OpenCrame;
     }
 
     public class SettingMessage
@@ -152,7 +155,7 @@ namespace LabelFoolproofMachine
             HOperatorSet.ReadRegion(out LableCircleRegion, sPath + "\\LableCircleRegion.hobj");
             HOperatorSet.ReadRegion(out LableDistanceRegion1, sPath + "\\LableDistanceRegion1.hobj");
             HOperatorSet.ReadRegion(out LableDistanceRegion2, sPath + "\\LableDistanceRegion2.hobj");
-           // HOperatorSet.ReadRegion(out SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
+            // HOperatorSet.ReadRegion(out SmallSelectedRegions, sPath + "\\SmallSelectedRegions.hobj");
 
         }
 

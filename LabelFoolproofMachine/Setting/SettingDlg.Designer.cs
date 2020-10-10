@@ -33,8 +33,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.CloseBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -57,12 +57,14 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(122, 190);
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(108, 142);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 33);
             this.button2.TabIndex = 3;
             this.button2.Text = "保存";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel1
@@ -75,36 +77,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(382, 265);
+            this.panel1.Size = new System.Drawing.Size(330, 204);
             this.panel1.TabIndex = 4;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button8);
+            this.panel2.Controls.Add(this.CloseBtn);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(382, 39);
+            this.panel2.Size = new System.Drawing.Size(330, 39);
             this.panel2.TabIndex = 4;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(340, 0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(42, 24);
-            this.button8.TabIndex = 10;
-            this.button8.Text = "×";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label2
             // 
@@ -116,11 +100,26 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "参数设置";
             // 
+            // CloseBtn
+            // 
+            this.CloseBtn.BackgroundImage = global::LabelFoolproofMachine.Properties.Resources.Close;
+            this.CloseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CloseBtn.FlatAppearance.BorderSize = 0;
+            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
+            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(230)))), ((int)(((byte)(253)))));
+            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseBtn.Location = new System.Drawing.Point(312, 1);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(16, 16);
+            this.CloseBtn.TabIndex = 31;
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
+            // 
             // SettingDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 265);
+            this.ClientSize = new System.Drawing.Size(330, 204);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SettingDlg";
@@ -143,6 +142,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }

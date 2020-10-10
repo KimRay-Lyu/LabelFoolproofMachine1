@@ -30,37 +30,48 @@ namespace LabelFoolproofMachine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawRegionCheck();
-            PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
-            HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
-                 PublicData.createNewCheckModel.checkOtherModel.OtherRegion,
-                out HTuple OtherNumber,
-                out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
-            HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherSelect, "blue", WindowsHandle, 2);
-            PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-        public void DrawRegionCheck()
-        {
-            pictureBox1.Focus();
-            switch (comboBox1.SelectedIndex)
+            if (DrawRegionCheck()==1)
             {
-                case 0:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
-                    break;
-                case 1:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
-                    break;
-                case 2:
-                    HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
-                    break;
-                default: return;
-            }
 
+                PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
+                HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
+                     PublicData.createNewCheckModel.checkOtherModel.OtherRegion, out HTuple OtherNumber,
+                    out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherSelect, "blue", WindowsHandle, 2);
+                PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;
+            }
+            
+            
+        }
+
+     
+        public int DrawRegionCheck()
+        {
+            
+            pictureBox1.Focus();
+            if (PublicData.GetImage == false)
+            {
+                MessageBox.Show("未获取到图片");
+                return 0;
+            }
+            else
+            {
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle1, out HRegion);
+                        break;
+                    case 1:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
+                        break;
+                    case 2:
+                        HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
+                        break;
+                   
+                }
+                return 1;
+            }
         }
 
         private void OtherLocationDlg_VisibleChanged(object sender, EventArgs e)

@@ -72,12 +72,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(676, 94);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 40);
             this.button1.TabIndex = 10;
             this.button1.Text = "画第一个角";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -92,22 +94,26 @@
             // 
             // button6
             // 
+            this.button6.BackColor = System.Drawing.Color.Gainsboro;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Location = new System.Drawing.Point(676, 148);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(152, 40);
             this.button6.TabIndex = 17;
             this.button6.Text = "画第二个角";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
+            this.button7.BackColor = System.Drawing.Color.Gainsboro;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Location = new System.Drawing.Point(676, 202);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(152, 40);
             this.button7.TabIndex = 18;
             this.button7.Text = "画大标签之间的缝隙";
-            this.button7.UseVisualStyleBackColor = true;
+            this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // BigLableDlg

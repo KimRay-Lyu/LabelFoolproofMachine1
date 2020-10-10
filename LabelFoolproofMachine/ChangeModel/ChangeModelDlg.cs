@@ -39,7 +39,7 @@ namespace LabelFoolproofMachine
             else
             {
                 this.DialogResult = DialogResult.OK;
-                sChangeModelPath = Application.StartupPath + "\\Model\\" + comboBox1.SelectedItem.ToString();
+                sChangeModelPath = Application.StartupPath + "\\Model\\" + comboBox1.Text.ToString();
                 ModelName = comboBox1.Text;
                
             }
@@ -61,6 +61,11 @@ namespace LabelFoolproofMachine
         {
             this.DialogResult = DialogResult.Cancel;
             sChangeModelPath = "";
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

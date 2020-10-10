@@ -97,21 +97,26 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(888, 21);
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(886, 21);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 45);
+            this.button2.Size = new System.Drawing.Size(108, 37);
             this.button2.TabIndex = 1;
             this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(745, 21);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 45);
+            this.button1.Size = new System.Drawing.Size(108, 37);
             this.button1.TabIndex = 0;
             this.button1.Text = "确认并保存";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel3

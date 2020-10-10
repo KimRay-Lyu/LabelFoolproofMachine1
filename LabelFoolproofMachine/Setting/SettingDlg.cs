@@ -20,9 +20,18 @@ namespace LabelFoolproofMachine
 
         private void button2_Click(object sender, EventArgs e)
         {
-            PublicData.settingMessage.CaremerName = textBox1.Text;
-            IniManager.WriteToIni(PublicData.settingMessage, Application.StartupPath + "\\Config" + "\\SettingMessage.Jason");
-            MessageBox.Show("保存成功！请重启软件！");
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("相机名字不能为空");
+            }
+            else
+            {
+
+
+                PublicData.settingMessage.CaremerName = textBox1.Text;
+                IniManager.WriteToIni(PublicData.settingMessage, Application.StartupPath + "\\Config" + "\\SettingMessage.Jason");
+                MessageBox.Show("保存成功！请重启软件！");
+            }
         }
 
         private void SettingDlg_Load(object sender, EventArgs e)
@@ -34,7 +43,9 @@ namespace LabelFoolproofMachine
             textBox1.Text = PublicData.settingMessage.CaremerName.ToString();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+    
+
+        private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }

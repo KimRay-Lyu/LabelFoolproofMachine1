@@ -21,17 +21,19 @@ namespace LabelFoolproofMachine
             InitializeComponent();
         }
         private HTuple WindowsHandle = new HTuple();
-        public static HObject Image = new HObject();
         public HObject HRegion = new HObject();
-       // private HObject ModelRegion = new HObject();
-        public static HTuple modelID = new HTuple();
         HObject TransContours = new HObject();
-
-        //PublicModelParam publicModel = new PublicModelParam();
-
+        private bool CreatModel = false;
+        
         private void button1_Click(object sender, EventArgs e)
         {
+            CreatModel = false;
             pictureBox1.Focus();
+            if (PublicData.GetImage == false)
+            {
+                MessageBox.Show("未获取到图片");
+                return;
+            }
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
@@ -60,7 +62,7 @@ namespace LabelFoolproofMachine
             }
             HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
             HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.VisualModelRegion, "blue", WindowsHandle, 2);
-            
+            CreatModel = true;
 
         }
 
@@ -76,26 +78,41 @@ namespace LabelFoolproofMachine
         private void button3_Click(object sender, EventArgs e)
         {
             //Image.Dispose();
-         
-            PublicData.createNewCheckModel.ModelImage.Dispose();
-            int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewCheckModel.ModelImage);
-            if (Res2 == 0)
+            if (PublicData.OpenCrame != 0)
             {
-
-                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+                MessageBox.Show("相机未开启");
             }
             else
             {
-                MessageBox.Show("相机图像获取失败");
+                PublicData.createNewCheckModel.ModelImage.Dispose();
+                int Res2 = PublicData.hkCameraCltr.Capture(out PublicData.createNewCheckModel.ModelImage);
+                if (Res2 == 0)
+                {
+
+                    HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+                    PublicData.GetImage = true;
+                }
+                else
+                {
+                    MessageBox.Show("相机图像获取失败");
+                }
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            HalconCommonFunc.CreateModel(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.VisualModelRegion, 
-                out PublicData.createNewCheckModel.VisualModelID,out  TransContours);
-            HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage,WindowsHandle);
-            HalconCommonFunc.DisplayRegionOrXld(TransContours, "blue", WindowsHandle, 2);
+            if (CreatModel==true)
+            {
+                HalconCommonFunc.CreateModel(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.VisualModelRegion,
+                out PublicData.createNewCheckModel.VisualModelID, out TransContours);
+                HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+                HalconCommonFunc.DisplayRegionOrXld(TransContours, "blue", WindowsHandle, 2);
+            }
+            else
+            {
+                MessageBox.Show("还未框定区域");
+            }
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -114,32 +131,8 @@ namespace LabelFoolproofMachine
                     HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
                 }
             }
+            PublicData.GetImage = true;
         }
-        /// <summary>
-        /// 保存模板
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-            //Directory.CreateDirectory(PublicData.settingMessage.定位模板保存地址 + "\\" + DateTime.Now.ToString("yy_MM_dd_hh_mm"));
-            //string localFilePath = PublicData.settingMessage.定位模板保存地址 + "\\" + DateTime.Now.ToString("yy_MM_dd_hh_mm");
-            //PublicData.settingMessage.定位模板保存地址 = localFilePath;
-            //IniManager.WriteToIni(PublicData.settingMessage, Application.StartupPath + "\\Config" + "\\SettingMessage.Jason");
-            //SaveFileDialog sfd = new SaveFileDialog();
-            ////设置默认文件类型显示顺序 
-            //sfd.FilterIndex = 1;
-            //sfd.Title = "保存模板";
-            ////保存对话框是否记忆上次打开的目录 
-            //sfd.RestoreDirectory = false;
-            //if (sfd.ShowDialog() == DialogResult.OK)
-            //{
-            //    localFilePath = sfd.FileName.ToString();
-            //}
-            //HOperatorSet.WriteShapeModel(ModelID, localFilePath + ".shm");
-            //HOperatorSet.WriteImage(Image, "bmp", 0, localFilePath);
-
-        }
+       
     }
 }

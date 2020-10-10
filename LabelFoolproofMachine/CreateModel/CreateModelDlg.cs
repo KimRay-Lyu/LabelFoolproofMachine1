@@ -32,8 +32,7 @@ namespace LabelFoolproofMachine
         SaveModelDlg saveModelDlg = new SaveModelDlg();
         private int TabSelectIndex = -1;
         private List<Button> buttons = new List<Button>();
-        private HObject Image;
-        HTuple WindowsHandle = null;
+    
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -135,6 +134,11 @@ namespace LabelFoolproofMachine
         private void button1_Click(object sender, EventArgs e)
         {
             saveModelDlg.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }
