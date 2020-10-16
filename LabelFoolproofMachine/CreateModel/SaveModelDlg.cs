@@ -32,6 +32,7 @@ namespace LabelFoolproofMachine
                 if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
                 PublicData.createNewCheckModel.WriteModel(path);
                 IniManager.WriteToIni(PublicData.createNewCheckModel, path + "\\CheckModel.jason");
+                MessageBox.Show("模板保存成功");
             }
            
         }

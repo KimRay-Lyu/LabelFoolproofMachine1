@@ -500,6 +500,22 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.CountObj(ho_SelectedRegions, out Number);
 
         }
+        public static void 四周bleblob(HObject InImage, HObject Rectangle, out HTuple mean)
+        {
+            //HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            //ho_SelectedRegions.Dispose();
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ho_ImageGray);
+            //HOperatorSet.GenRectangle1(out HObject ho_Rectangle, 505.0, 10.0164, 907.0, 328.514);
+            HOperatorSet.ReduceDomain(ho_ImageGray, Rectangle, out HObject ho_ImageReduced);
+            HOperatorSet.Intensity(Rectangle, ho_ImageReduced, out mean, out HTuple Deviation);
+            //HOperatorSet.Threshold(ho_ImageReduced, out HObject ho_Regions, 15, 93);
+            //HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
+            //HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
+            //    "and", 150, 50000);
+            //HOperatorSet.CountObj(ho_SelectedRegions, out Number);
+
+        }
+
         public static void BigLablIntervalLable(HObject InImage, HObject Rectangle, out HTuple Number, out HObject ho_SelectedRegions)
         {
             HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
@@ -507,13 +523,13 @@ namespace LabelFoolproofMachine.Halcon
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ho_ImageGray);
             //HOperatorSet.GenRectangle1(out HObject ho_Rectangle, 505.0, 10.0164, 907.0, 328.514);
             HOperatorSet.ReduceDomain(ho_ImageGray, Rectangle, out HObject ho_ImageReduced);
-            HOperatorSet.Threshold(ho_ImageReduced, out HObject ho_Regions, 11, 56);
+            HOperatorSet.Threshold(ho_ImageReduced, out HObject ho_Regions, 15, 130);
             HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
             HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
-                "and", 153.211, 1000);
+                "and", 1000, 50000);
             HOperatorSet.CountObj(ho_SelectedRegions, out Number);
 
-        }
+            }
         /// <summary>
         /// 小标签的有无
         /// </summary>
@@ -537,14 +553,23 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="Rectangle"></param>
         /// <param name="InWindouHandle"></param>
         /// <param name="mean"></param>
-        public static void SmallLableCircle(HObject InImage, HObject Rectangle, out HTuple mean)
+        public static void SmallLableCircle(HObject InImage, HObject Rectangle, out HTuple Number)
         {
-            HOperatorSet.GenEmptyObj(out HObject ImageGray);
-            ImageGray.Dispose();
+            //HOperatorSet.GenEmptyObj(out HObject ImageGray);
+            //ImageGray.Dispose();
 
-            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out ImageGray);
-            HOperatorSet.Intensity(Rectangle, InImage, out mean, out HTuple deviation);
-
+            //HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out ImageGray);
+            //HOperatorSet.Intensity(Rectangle, ImageGray, out mean, out HTuple deviation);
+            HOperatorSet.GenEmptyObj(out HObject ho_SelectedRegions);
+            ho_SelectedRegions.Dispose();
+            
+            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
+            HOperatorSet.ReduceDomain(ImageGray, Rectangle, out HObject ImageReduced);
+            HOperatorSet.Threshold(ImageReduced, out HObject ho_Regions, 15, 100);
+            HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
+            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
+                "and", 150, 50000);
+            HOperatorSet.CountObj(ho_SelectedRegions,out Number);
 
         }
         /// <summary>
@@ -555,22 +580,14 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="InWindouHandle"></param>
         /// <param name="Area"></param>
         /// <param name="ho_SelectedRegions"></param>
-        public static void SmallLableAngle(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple Area, out HObject ho_SelectedRegions)
-        {
-            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
-            ho_SelectedRegions.Dispose();
-            HOperatorSet.SetDraw(InWindouHandle, "margin");
-            HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
-            HOperatorSet.ReduceDomain(ImageGray, Rectangle, out HObject ImageReduced);
-            HOperatorSet.Threshold(ImageReduced, out HObject ho_Regions, 0, 128);
-            HOperatorSet.Connection(ho_Regions, out HObject ho_ConnectedRegions);
-            HOperatorSet.SelectShape(ho_ConnectedRegions, out ho_SelectedRegions, "area",
-                "and", 67431.2, 420642);
-            HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
-            HOperatorSet.SetColor(InWindouHandle, "red");
-            HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
+        //public static void SmallLableAngle(HObject InImage, HObject Rectangle, HTuple InWindouHandle, out HTuple Area, out HObject ho_SelectedRegions)
+        //{
+            
+        //    HOperatorSet.AreaCenter(ho_SelectedRegions, out Area, out HTuple Row, out HTuple Column);
+        //    HOperatorSet.SetColor(InWindouHandle, "red");
+        //    HOperatorSet.DispObj(ho_SelectedRegions, InWindouHandle);
 
-        }
+        //}
         /// <summary>
         /// 小标签测距
         /// </summary>
@@ -581,6 +598,7 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="Edges1"></param>
         public static void SmallLabledistance(HObject InImage, HObject Rectangle, out HTuple DistanceMin, out HObject SortedContours)
         {
+           
             HOperatorSet.GenEmptyObj(out SortedContours);
             SortedContours.Dispose();
             HOperatorSet.Rgb3ToGray(InImage, InImage, InImage, out HObject ImageGray);
@@ -593,12 +611,13 @@ namespace LabelFoolproofMachine.Halcon
             //    "and", 18119.3, 42614.7);
             //HOperatorSet.ReduceDomain(ImageReduced, SelectedRegions, out HObject ImageReduced1);
             HOperatorSet.EdgesSubPix(ImageReduced, out HObject Edges1, "canny", 1, 20, 40);
-            HOperatorSet.SelectContoursXld(Edges1, out  SortedContours, "contour_length", 50, 500, -0.5, 0.5);
+            HOperatorSet.SelectContoursXld(Edges1, out  SortedContours, "contour_length", 30, 500, -0.5, 0.5);
             //计算边缘数量
-            HOperatorSet.CountObj(Edges1, out HTuple Number);
-            //排序边缘轮廓
-            HOperatorSet.SortContoursXld(SortedContours, out HObject ho_SortedContours, "upper_right",
-                "true", "row");
+           
+            HOperatorSet.CountObj(SortedContours, out HTuple Number);
+            //排序边缘轮
+            HOperatorSet.SortContoursXld(SortedContours, out HObject ho_SortedContours, "lower_right",
+                "false", "row");
             //选择轮廓1，2
             HOperatorSet.SelectObj(ho_SortedContours, out HObject ho_ObjectSelected2, 1);
             HOperatorSet.SelectObj(ho_SortedContours, out HObject ho_ObjectSelected3, 2);
@@ -685,17 +704,18 @@ namespace LabelFoolproofMachine.Halcon
         /// <param name="DistanceRegion1"></param>
         /// <param name="DistanceRegion2"></param>
         public static void CheckSmallLable(HObject InImage, out HObject CircleRegion, out HObject DistanceRegion1, out HObject DistanceRegion2
-            , out HTuple Mean, out HTuple Distance1, out HTuple Distance2, out HObject Edges1, out HObject Edges2)
+            , out HTuple CircleNumber, out double 标签尺寸1, out double 标签尺寸2, out HObject Edges1, out HObject Edges2)
         {
             //HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableNothingRegion, out NothingRegion);
             HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableCircleRegion, out CircleRegion);
             HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion1, out DistanceRegion1);
             HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableDistanceRegion2, out DistanceRegion2);
             //HalconCommonFunc.SmallLableNothing(InImage, NothingRegion, out NothingRegionNumber, out HObject Select);
-            HalconCommonFunc.SmallLableCircle(InImage, CircleRegion, out Mean);
-            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion1, out Distance1, out Edges1);
-            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion2, out Distance2, out Edges2);
-
+            HalconCommonFunc.SmallLableCircle(InImage, CircleRegion, out CircleNumber);
+            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion1, out HTuple Distance1, out Edges1);
+            HalconCommonFunc.SmallLabledistance(InImage, DistanceRegion2, out HTuple Distance2, out Edges2);
+            标签尺寸1 = Distance1.D / 17.88;
+            标签尺寸2 = Distance2.D / 17.88;
 
 
         }
@@ -704,11 +724,13 @@ namespace LabelFoolproofMachine.Halcon
         /// 其他标签
         /// </summary>
         /// <param name="AnglehObject"></param>
-        public static void CheckOtherLable(HObject InImage, out HObject OtherhObject, out HTuple OtherhNumber)
+        public static void CheckOtherLable(HObject InImage, out HObject OtherhObject,out HObject OtherhObject1, out HTuple 左边灰度值, out HTuple 右边灰度值)
         {
 
-            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkBigLableModel.BigLableAngleRegion1, out OtherhObject);
-            HalconCommonFunc.BigLableblob(InImage, OtherhObject, out OtherhNumber, out HObject Select);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkOtherModel.OtherRegion, out OtherhObject);
+            HalconCommonFunc.AffineModel(PublicData.CheckModel.checkOtherModel.OtherRegion1, out OtherhObject1);
+            HalconCommonFunc.四周bleblob(InImage, OtherhObject, out 左边灰度值);
+            HalconCommonFunc.四周bleblob(InImage, OtherhObject1, out 右边灰度值);
 
         }
     }

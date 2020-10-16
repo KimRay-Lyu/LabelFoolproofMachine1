@@ -117,7 +117,7 @@ namespace LabelFoolproofMachine
             LableDistanceRegion1 = new HObject();
             LableDistanceRegion2 = new HObject();
             //SmallSelectedRegions = new HObject();
-            SmallLableMean = 0.0f;
+            //SmallLableMean = 0.0f;
             LableNothingMean = 0.0f;
 
         }
@@ -133,7 +133,7 @@ namespace LabelFoolproofMachine
         public HObject LableDistanceRegion2;
         //[JsonIgnore]
         //public HObject SmallSelectedRegions;
-        public double SmallLableMean;//平均灰度
+        //public double SmallLableMean;//平均灰度
         public double LableNothingMean;//标签有无数量
 
         public void WriteModel(string sPath)
@@ -224,26 +224,33 @@ namespace LabelFoolproofMachine
         public CheckOtherModel()
         {
             OtherRegion = new HObject();
-            OtherSelect = new HObject();
+            OtherRegion1 = new HObject();
+            //OtherSelect = new HObject();
             OtherNumber = 0.0f;
         }
         [JsonIgnore]
         public HObject OtherRegion;
         [JsonIgnore]
-        public HObject OtherSelect;
+        public HObject OtherRegion1;
+        //[JsonIgnore]
+        //public HObject OtherSelect;
         public double OtherNumber;
 
         public void WriteModel(string sPath)
         {
             HOperatorSet.WriteRegion(OtherRegion, sPath + "\\OtherRegion.hobj");
-            HOperatorSet.WriteRegion(OtherSelect, sPath + "\\OtherSelect.hobj");
+            HOperatorSet.WriteRegion(OtherRegion1, sPath + "\\OtherRegion1.hobj");
+            //HOperatorSet.WriteRegion(OtherSelect, sPath + "\\OtherSelect.hobj");
+
         }
         public void ReadModel(string sPath)
         {
             OtherRegion.Dispose();
-            OtherSelect.Dispose();
+            //OtherSelect.Dispose();
+            OtherRegion1.Dispose();
             HOperatorSet.ReadRegion(out OtherRegion, sPath + "\\OtherRegion.hobj");
-            HOperatorSet.ReadRegion(out OtherSelect, sPath + "\\OtherSelect.hobj");
+            HOperatorSet.ReadRegion(out OtherRegion1, sPath + "\\OtherRegion1.hobj");
+            //HOperatorSet.ReadRegion(out OtherSelect, sPath + "\\OtherSelect.hobj");
 
         }
     }

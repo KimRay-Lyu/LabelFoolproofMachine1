@@ -1,0 +1,15 @@
+{
+    "chickMineLableModel": {
+        "DistanceMin": 175.77877548270871,
+        "DistanceMin1": 176.22845320472462,
+        "LableNothingMean": 97.2225
+    },
+    "checkBigLableModel": {
+        "BigLableAngleNumber1": 1.0,
+        "BigLableAngleNumber2": 1.0,
+        "BigLableNumber": 0.0
+    },
+    "checkOtherModel": {
+        "OtherNumber": 0.0
+    }
+}

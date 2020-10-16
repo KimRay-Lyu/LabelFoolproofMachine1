@@ -124,14 +124,14 @@
             // 启动ToolStripMenuItem
             // 
             this.启动ToolStripMenuItem.Name = "启动ToolStripMenuItem";
-            this.启动ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.启动ToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
             this.启动ToolStripMenuItem.Text = "启动";
             this.启动ToolStripMenuItem.Click += new System.EventHandler(this.启动ToolStripMenuItem_Click);
             // 
             // 停止ToolStripMenuItem
             // 
             this.停止ToolStripMenuItem.Name = "停止ToolStripMenuItem";
-            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
             this.停止ToolStripMenuItem.Text = "停止";
             this.停止ToolStripMenuItem.Click += new System.EventHandler(this.停止ToolStripMenuItem_Click);
             // 
@@ -145,9 +145,10 @@
             // 
             // StartCheckButon
             // 
-            this.StartCheckButon.BackColor = System.Drawing.Color.Gainsboro;
+            this.StartCheckButon.BackColor = System.Drawing.Color.Green;
             this.StartCheckButon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StartCheckButon.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.StartCheckButon.ForeColor = System.Drawing.Color.White;
             this.StartCheckButon.Location = new System.Drawing.Point(791, 533);
             this.StartCheckButon.Name = "StartCheckButon";
             this.StartCheckButon.Size = new System.Drawing.Size(207, 52);
@@ -158,9 +159,10 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Location = new System.Drawing.Point(830, 607);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 42);
@@ -188,10 +190,6 @@
             this.label2.Size = new System.Drawing.Size(42, 21);
             this.label2.TabIndex = 5;
             this.label2.Text = "xxxx";
-            // 
-            // serialPort1
-            // 
-            this.serialPort1.PortName = "COM10";
             // 
             // pictureBox1
             // 

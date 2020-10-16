@@ -54,7 +54,7 @@ namespace LabelFoolproofMachine
                 PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion = HRegion;
                 HalconCommonFunc.SmallLableCircle(PublicData.createNewCheckModel.ModelImage, PublicData.createNewCheckModel.chickMineLableModel.LableCircleRegion,
                     out HTuple SmallLableMean);
-                PublicData.createNewCheckModel.chickMineLableModel.SmallLableMean = SmallLableMean.D;
+                //PublicData.createNewCheckModel.chickMineLableModel.SmallLableMean = SmallLableMean.D;
             }
 
 
@@ -100,6 +100,7 @@ namespace LabelFoolproofMachine
                 HalconCommonFunc.DisplayRegionOrXld(HRegion, "blue", WindowsHandle, 2);
                 HalconCommonFunc.DisplayRegionOrXld(Eigs, "blue", WindowsHandle, 2);
                 PublicData.createNewCheckModel.chickMineLableModel.DistanceMin = DistanceMin.D;
+                //double x = DistanceMin.D / 18.18;
             }
         }
 

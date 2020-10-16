@@ -72,7 +72,6 @@ C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\Label
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\bin\Debug\log4net.xml
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.csprojAssemblyReference.cache
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.ChangeModelDlg.resources
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.BigLableDlg.resources
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.CreateModelDlg.resources
@@ -116,3 +115,4 @@ F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug
 F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.exe
 F:\项目\github本地库\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.pdb
 C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.ReselectModelDlg.resources
+C:\Users\Administrator\Source\Repos\LLLLLLLLLLLLLLJ\LabelFoolproofMachine1\LabelFoolproofMachine\obj\Debug\LabelFoolproofMachine.csprojAssemblyReference.cache

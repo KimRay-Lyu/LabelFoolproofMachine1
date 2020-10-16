@@ -33,12 +33,11 @@ namespace LabelFoolproofMachine
 
             if (DrawRegionCheck()==1)
             {
-
+                //HOperatorSet.GenRectangle2(out HRegion, 698.174, 420.195, -1.58345, 292.862, 11.1591);
                 PublicData.createNewCheckModel.checkOtherModel.OtherRegion = HRegion;
-                HalconCommonFunc.BigLableblob(PublicData.createNewCheckModel.ModelImage,
-                     PublicData.createNewCheckModel.checkOtherModel.OtherRegion, out HTuple OtherNumber,
-                    out PublicData.createNewCheckModel.checkOtherModel.OtherSelect);
-                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherSelect, "blue", WindowsHandle, 2);
+                HalconCommonFunc.四周bleblob(PublicData.createNewCheckModel.ModelImage,
+                     PublicData.createNewCheckModel.checkOtherModel.OtherRegion, out HTuple OtherNumber);
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherRegion, "blue", WindowsHandle, 2);
                 PublicData.createNewCheckModel.checkOtherModel.OtherNumber = OtherNumber.D;
             }
             
@@ -64,6 +63,7 @@ namespace LabelFoolproofMachine
                         break;
                     case 1:
                         HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Rectangle2, out HRegion);
+                        //HOperatorSet.GenRectangle2(out HRegion, 488.094, 1483.98, -1.59531, 302.478, 27.5584);
                         break;
                     case 2:
                         HalconCommonFunc.DrawRegion(WindowsHandle, DrawModel.Circle, out HRegion);
@@ -79,6 +79,20 @@ namespace LabelFoolproofMachine
             if (this.Visible == true)
             {
                 HalconCommonFunc.DisplayImage(PublicData.createNewCheckModel.ModelImage, WindowsHandle);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (DrawRegionCheck() == 1)
+            {
+               // HOperatorSet.GenRectangle2(out HRegion, 710.906, 1428.38, -1.59505, 305.66, 11.2292);
+                PublicData.createNewCheckModel.checkOtherModel.OtherRegion1 = HRegion;
+                HalconCommonFunc.四周bleblob(PublicData.createNewCheckModel.ModelImage,
+                     PublicData.createNewCheckModel.checkOtherModel.OtherRegion1, out HTuple OtherNumber
+                   );
+                HalconCommonFunc.DisplayRegionOrXld(PublicData.createNewCheckModel.checkOtherModel.OtherRegion1, "blue", WindowsHandle, 2);
+                
             }
         }
     }

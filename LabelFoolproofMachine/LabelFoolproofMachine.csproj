@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>7.1</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -189,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="切换模板\" />
-    <Folder Include="调试\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Close.png" />

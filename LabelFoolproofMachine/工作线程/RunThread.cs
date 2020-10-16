@@ -41,11 +41,19 @@ namespace LabelFoolproofMachine
         {
 
             HTuple Socre = null;
+            HTuple CircleNumber;
+            HObject CircleRegion;
+            HObject DistanceRegion1;
+                HObject DistanceRegion2;
+            double 标签尺寸1;
+            double 标签尺寸2;
+            HObject Edges1;
+                HObject Edges2;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Restart();//开始计时
             while (ThreadExit == false)
-            {         
-                if (PublicData.调试模式==2||PublicData.调试模式==0)
+            {
+                if (PublicData.调试模式 == 2 || PublicData.调试模式 == 0)
                 {
                     HOperatorSet.GenEmptyObj(out PublicData.CheckModel.ModelImage);
                     PublicData.CheckModel.ModelImage.Dispose();
@@ -67,7 +75,7 @@ namespace LabelFoolproofMachine
                     TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 1, sResult = "找不到图片" });
                     break;
                 }
-                if (stopwatch.ElapsedMilliseconds > 10000)
+                if (stopwatch.ElapsedMilliseconds > 500)
                 {
                     TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 1, sResult = "找不到大标签" });
                     break;
@@ -78,9 +86,9 @@ namespace LabelFoolproofMachine
                 HOperatorSet.AreaCenter(RegionUnion, out HTuple area, out HTuple row, out HTuple column);
                 region.Dispose();
                 RegionUnion.Dispose();
-                if (Socre < 0.7 || row < 400 || row > 800)
+                if (Socre < 0.6 || row < 400 || row > 800)
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(10);
                     //TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 1, sResult = "定位失败" });
                     continue;
                 }
@@ -106,7 +114,7 @@ namespace LabelFoolproofMachine
                 HalconCommonFunc.DisplayRegionOrXld(IntervalLable, "green", PublicData.WindowsHandle, 2);
                 HalconCommonFunc.AffineModel(PublicData.CheckModel.chickMineLableModel.LableNothingRegion, out HObject NothingRegion);
                 HalconCommonFunc.SmallLableNothing(PublicData.CheckModel.ModelImage, NothingRegion, out HTuple NothingRegionMean);
-                if (NothingRegionMean > 100)
+                if (NothingRegionMean > 110)
                 {
                     TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 4, sResult = "没有小标签" });
                     HalconCommonFunc.DisplayRegionOrXld(NothingRegion, "red", PublicData.WindowsHandle, 2);
@@ -114,10 +122,20 @@ namespace LabelFoolproofMachine
                     break;
                 }
                 HalconCommonFunc.DisplayRegionOrXld(NothingRegion, "green", PublicData.WindowsHandle, 2);
-                HalconCommonFunc.CheckSmallLable(PublicData.CheckModel.ModelImage, out HObject CircleRegion,
-                    out HObject DistanceRegion1, out HObject DistanceRegion2, out HTuple Mean,
-                    out HTuple Distance1, out HTuple Distance2, out HObject Edges1, out HObject Edges2);
-                if (PublicData.CheckModel.chickMineLableModel.SmallLableMean + 100 < Mean.D || Mean.D < PublicData.CheckModel.chickMineLableModel.SmallLableMean - 100)
+                try
+                {
+                    
+                    HalconCommonFunc.CheckSmallLable(PublicData.CheckModel.ModelImage, out  CircleRegion,
+                   out  DistanceRegion1, out  DistanceRegion2, out CircleNumber,
+                   out  标签尺寸1, out  标签尺寸2, out  Edges1, out  Edges2);
+                }
+                catch (Exception ex)
+                {
+                    TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 4, sResult = ex.ToString() });
+                    break;
+                }
+               
+                if (CircleNumber>0)
                 {
                     TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 5, sResult = "小标签圆弧有未切割好的纸" });
                     HalconCommonFunc.DisplayRegionOrXld(CircleRegion, "red", PublicData.WindowsHandle, 2);
@@ -125,9 +143,24 @@ namespace LabelFoolproofMachine
                     break;
                 }
                 HalconCommonFunc.DisplayRegionOrXld(CircleRegion, "green", PublicData.WindowsHandle, 2);
-                if (Distance1.D > PublicData.CheckModel.chickMineLableModel.DistanceMin + 80 || Distance1.D < PublicData.CheckModel.chickMineLableModel.DistanceMin - 80)
+                if (标签尺寸1 > 10.15 || 标签尺寸1 < 9.42)
                 {
                     TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 6, sResult = "小标签宽度不对" });
+                    HalconCommonFunc.DisplayRegionOrXld(DistanceRegion1, "red", PublicData.WindowsHandle, 2);
+                    Thread.Sleep(1000);
+                    break;
+                }
+                if (标签尺寸2 > 10.15 || 标签尺寸2 < 9.42)
+                {
+                    TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 6, sResult = "小标签宽度不对" });
+                    HalconCommonFunc.DisplayRegionOrXld(DistanceRegion2, "red", PublicData.WindowsHandle, 2);
+                    Thread.Sleep(1000);
+                    break;
+                }
+                if (标签尺寸1- 标签尺寸2<-0.3|| 标签尺寸1 - 标签尺寸2 >0.3)
+                {
+                    TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 6, sResult = "小标签倾斜" });
+                    
                     Thread.Sleep(1000);
                     break;
                 }
@@ -135,18 +168,20 @@ namespace LabelFoolproofMachine
                 HalconCommonFunc.DisplayRegionOrXld(DistanceRegion2, "green", PublicData.WindowsHandle, 2);
                 HalconCommonFunc.DisplayRegionOrXld(Edges1, "green", PublicData.WindowsHandle, 2);
                 HalconCommonFunc.DisplayRegionOrXld(Edges2, "green", PublicData.WindowsHandle, 2);
-                HalconCommonFunc.CheckOtherLable(PublicData.CheckModel.ModelImage, out HObject OtherhObject, out HTuple OtherhNumber);
+                HalconCommonFunc.CheckOtherLable(PublicData.CheckModel.ModelImage, out HObject OtherhObject, out HObject OtherhObject1, out HTuple 左边灰度值, out HTuple 右边灰度值);
                 //HalconCommonFunc.DisplayImage(CameraImage, PublicData.WindowsHandle);
-                //if (OtherhNumber > 0)
-                //{
-                //    TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 7, sResult = "小标签圆弧角有多余的纸" });
-                //    Thread.Sleep(1000);
-                //    break;
-                //}
-                //HalconCommonFunc.DisplayRegionOrXld(OtherhObject, "green", PublicData.WindowsHandle, 2);
+                if (左边灰度值 <253 || 右边灰度值 <253)
+                {
+                    TheadWorkResultEvent?.Invoke(this, new TheadWorkResultEventArgs { nResult = 7, sResult = "标签两边有多余的纸" });
+                    Thread.Sleep(1000);
+                    break;
+                }
+
+                HalconCommonFunc.DisplayRegionOrXld(OtherhObject, "green", PublicData.WindowsHandle, 2);
+                HalconCommonFunc.DisplayRegionOrXld(OtherhObject1, "green", PublicData.WindowsHandle, 2);
 
                 stopwatch.Restart();
-                if (PublicData.调试模式==1||PublicData.调试模式==2)
+                if (PublicData.调试模式 == 1 || PublicData.调试模式 == 2)
                 {
                     break;
                 }

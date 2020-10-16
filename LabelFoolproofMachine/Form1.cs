@@ -13,14 +13,18 @@ namespace LabelFoolproofMachine
         private ChangeModelDlg changeModelDlg = new ChangeModelDlg();
         private SettingDlg settingDlg = new SettingDlg();
         //public HTuple WindowsHandle;
+        private delegate void XXX();
+        
 
         private RunThread runthread = new RunThread();
-        
+        byte[] buffer = new byte[3] { 0x8f, 0x09, 0x7f };//电机跟红灯
         public Form1()
         {
             InitializeComponent();
             runthread.TheadWorkResultEvent += Runthread_TheadWorkResultEvent1;
             //serialPort1.Open();
+           
+
         }
 
 
@@ -28,11 +32,16 @@ namespace LabelFoolproofMachine
         {
             if (serialPort1.IsOpen)
             {
-                byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
                 serialPort1.Write(buffer, 0, 3);
             }
             HOperatorSet.WriteImage(PublicData.CheckModel.ModelImage, "bmp", 0, Application.StartupPath + "\\ErrorImage\\" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm"));
-            MessageBox.Show(e.sResult);
+            MessageBox.Show("出现错误:" + e.sResult + "\n" + "操作提示:" + "\n" + "1.请先停止检测再处理有问题的标签；" + "\n" + "2.摆正标签，开始检测");
+            XXX stop = delegate
+            {
+                StartCheckButon.Text = "开 始 检 测";
+                StartCheckButon.Enabled = true;
+            };
+            StartCheckButon.Invoke(stop);
         }
 
 
@@ -43,7 +52,7 @@ namespace LabelFoolproofMachine
             HalconCommonFunc.SetPart(PublicData.WindowsHandle, 1920, 1200, pictureBox1.Width, pictureBox1.Height);
             PublicData.settingMessage = IniManager.ReadFromIni<SettingMessage>(Application.StartupPath + "\\Config" + "\\SettingMessage.Jason");
             HkCameraCltr.EnumDevices();
-           PublicData.OpenCrame = PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName);
+            PublicData.OpenCrame = PublicData.hkCameraCltr.OpenDevices(PublicData.settingMessage.CaremerName);
             if (0 == PublicData.OpenCrame)
             {
                 MessageBox.Show("相机连接成功");
@@ -124,12 +133,12 @@ namespace LabelFoolproofMachine
                 MessageBox.Show("未选择模板");
                 return;
             }
-            if (serialPort1.IsOpen==false)
+            if (serialPort1.IsOpen == false)
             {
                 MessageBox.Show("串口未开启，重启软件重试");
                 return;
             }
-            if (PublicData.OpenCrame !=0)
+            if (PublicData.OpenCrame != 0)
             {
                 MessageBox.Show("相机未开启");
             }
@@ -139,6 +148,8 @@ namespace LabelFoolproofMachine
                 {
                     PublicData.调试模式 = 0;
                     runthread.StartWork();
+                    byte[] buffer = new byte[3] { 0x8f, 0x02, 0x7f };//绿灯
+                    serialPort1.Write(buffer, 0, 3);
                     StartCheckButon.Text = "检测中";
                     StartCheckButon.Enabled = false;
                 }
@@ -149,6 +160,8 @@ namespace LabelFoolproofMachine
         private void button2_Click(object sender, EventArgs e)
         {
             runthread.StopWork();
+            byte[] buffer1 = new byte[3] { 0x8f, 0x08, 0x7f };
+            serialPort1.Write(buffer1, 0, 3);
             StartCheckButon.Text = "开 始 检 测";
             StartCheckButon.Enabled = true;
 
@@ -158,8 +171,13 @@ namespace LabelFoolproofMachine
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             runthread.StopWork();
+            if (serialPort1.IsOpen)
+            {
+                byte[] buffer1 = new byte[3] { 0x8f, 0x08, 0x7f };
+                serialPort1.Write(buffer1, 0, 3);
+            }
             PublicData.hkCameraCltr.CloseDevices();
-            //serialPort1.Close();
+            serialPort1.Close();
 
         }
 
@@ -169,8 +187,8 @@ namespace LabelFoolproofMachine
             {
                 if (serialPort1.IsOpen)
                 {
-                    byte[] buffer = new byte[3] { 0x8f, 0x00, 0x7f };
-                    serialPort1.Write(buffer, 0, 3);
+                    byte[] buffer2 = new byte[3] { 0x8f, 0x00, 0x7f };
+                    serialPort1.Write(buffer2, 0, 3);
                 }
                 else
                 {
@@ -192,8 +210,8 @@ namespace LabelFoolproofMachine
             {
                 if (serialPort1.IsOpen)
                 {
-                    byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };
-                    serialPort1.Write(buffer, 0, 3);
+                    byte[] buffer3 = new byte[3] { 0x8f, 0x08, 0x7f };
+                    serialPort1.Write(buffer3, 0, 3);
                 }
                 else
                 {
@@ -249,6 +267,32 @@ namespace LabelFoolproofMachine
         private void 调试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            byte[] buffer = new byte[3] { 0x8f, 0x01, 0x7f };//红灯
+            //byte[] buffer2 = new byte[3] { 0x8f, 0x04, 0x7f };
+            //byte[] buffer3= new byte[3] { 0x8f, 0x08, 0x7f };
+
+            serialPort1.Write(buffer, 0, 3);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            byte[] buffer = new byte[3] { 0x8f, 0x02, 0x7f };//绿灯
+
+
+            serialPort1.Write(buffer, 0, 3);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            byte[] buffer = new byte[3] { 0x8f, 0x09, 0x7f };//电机停，红灯亮
+            //byte[] buffer2 = new byte[3] { 0x8f, 0x04, 0x7f };
+            //byte[] buffer3= new byte[3] { 0x8f, 0x08, 0x7f };
+
+            serialPort1.Write(buffer, 0, 3);
         }
     }
 }
